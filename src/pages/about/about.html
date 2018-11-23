@@ -1,11 +1,121 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      اضافة اعلان
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
+
+  <ion-list>
+
+    <ion-list-header>
+     معلومات عن العقار
+
+      </ion-list-header>
+  
+      <ion-item>
+          <ion-icon name="md-create" item-start></ion-icon>
+          <ion-input placeholder="عنوان المنشور مثال (بيت للايجار)"></ion-input>
+      </ion-item>
+
+  <ion-item>
+      <ion-icon name="pin" item-start></ion-icon>
+      <ion-input placeholder="المحافضة"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="map" item-start></ion-icon>
+    <ion-input placeholder="المنطقة"></ion-input>
+   </ion-item>
+
+   <ion-item>
+      <ion-icon name="home" item-start></ion-icon>
+      <ion-input placeholder="نوع العقد"></ion-input>
+     </ion-item>
+
+     <ion-item>
+        <ion-icon name="contract" item-start></ion-icon>
+    <ion-input placeholder="المساحة" type="number"></ion-input>
+     </ion-item>
+
+   <ion-item>
+      <ion-icon name="apps" item-start></ion-icon>
+          <ion-input placeholder="عدد الطوابق" type="number"></ion-input>
+   </ion-item>
+
+   <ion-item>
+      <ion-icon name="cube" item-start></ion-icon>
+      <ion-input placeholder="عدد الغرف" type="number"></ion-input>
+   </ion-item>
+
+
+
+   <ion-item>
+      <ion-icon name="card" item-start></ion-icon>
+      <ion-input placeholder="السعر" type="number"></ion-input>
+   </ion-item>
+
+
+
+
+   <ion-list-header>
+      معلوماتك المطلوبة
+    </ion-list-header>
+
+    <ion-item>
+        <ion-icon name="body" item-start></ion-icon>
+        <ion-input placeholder="اسمك" type="text"></ion-input>
+
+      </ion-item>
+
+      <ion-item>
+          <ion-icon name="pin" item-start></ion-icon>
+          <ion-input placeholder="عنوانك"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-icon name="phone-portrait" item-start></ion-icon>
+          <ion-input placeholder="رقم الهاتف" type="number"></ion-input>
+       </ion-item>
+
+
+
+            <ion-list-header>
+                صور للعقار
+              </ion-list-header>
+
+              <ion-item>
+                  <ion-grid>
+                      <ion-row>
+
+                          <ion-col col-6 *ngFor="let image of donloadImgs"> 
+                              <div class="pic">
+                              <img [src]="image">
+                              </div>
+                            </ion-col>
+
+                        <ion-col col-6 class="colheader" (click)="takePhoto()"> 
+                          <div class="pic">
+                              <ion-icon name="images"></ion-icon>
+                              <p>اختر صورة</p>
+                          <img *ngIf="image">
+                          </div>
+                        </ion-col>
+
+                      </ion-row>
+                
+                    </ion-grid>
+              </ion-item>
+
+              <ion-item>
+              <button ion-button color="danger" outline full (click)="saveData()">نشر الاعلان</button>
+
+              </ion-item>
+
+  </ion-list>
+
+
 
 </ion-content>

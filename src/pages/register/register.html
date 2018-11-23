@@ -1,0 +1,100 @@
+
+<ion-content>
+
+<div class="father">
+
+<div class="mcontent">
+
+<div class="logo">
+    <img src="assets/imgs/home.svg" width="150px" height="150px"> 
+</div>
+
+<div class="inputs">
+
+<!-- singup view -->
+
+<div class="signupView">
+    
+    <div class="username">
+        <img src="assets/imgs/boy.svg">
+
+        <input type="text" placeholder="اسم المستخدم" id="username" #namereg onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57)" >
+    </div>
+
+    <div class="email">
+      <img src="assets/imgs/email.svg">
+        <input type="email" placeholder="البريد الالكتروني" #emailreg>
+    </div>
+
+    <div class="pass">
+        <img src="assets/imgs/key.svg">
+        <input type="password" placeholder="كلمة المرور" id="password" #passreg>
+        <i class="fa fa-eye" aria-hidden="true" id="showpass" (click)="shoEye()" ></i>
+        <i class="fa fa-eye-slash" aria-hidden="true" id="hidepass" (click)="hideEye()"></i>
+
+    </div>
+
+    <div class="sections">
+            <div class="login">
+                    <p (click)="viewLogin()" >لديك حساب؟</p>
+            </div>
+            <button color="dark" ion-button outline (click)="register(emailreg.value,namereg.value,passreg.value)" >انشاء حساب</button>
+            
+    </div>
+
+</div>
+
+<div class="loginView">
+
+    
+    <div class="email">
+        <img src="assets/imgs/email.svg">
+          <input type="email" placeholder="البريد الالكتروني" #emaillog>
+      </div>
+  
+      <div class="pass">
+          <img src="assets/imgs/key.svg">
+          <input type="password" placeholder="كلمة المرور" id="passwordTwo" #passlog>
+          <i class="fa fa-eye" aria-hidden="true" id="showpassTwo" (click)="shoEyeTwo()" ></i>
+          <i class="fa fa-eye-slash" aria-hidden="true" id="hidepassTwo" (click)="hideEyeTwo()"></i>
+  
+      </div>
+    
+        <div class="sections">
+                <div class="login">
+                        <p (click)="viewSignup()">انشاء حساب؟</p>
+                </div>
+                <button color="dark" ion-button outline (click)="login(emaillog.value,passlog.value)" >دخول</button>
+            
+        </div>
+    
+    </div>
+
+</div>
+
+
+    <div class="or">
+        <div class="orleft"></div>
+        <div>OR BY</div>
+        <div class="orright"></div>
+    </div>
+    
+    <div class="sochial">
+        
+    
+            <img src="assets/imgs/facebook.svg">
+            <img src="assets/imgs/twitter.svg">
+            <img src="assets/imgs/google-plus.svg">
+
+
+
+
+<!-- end signup view-->
+</div>
+
+
+</div>
+  
+</div>
+
+</ion-content>

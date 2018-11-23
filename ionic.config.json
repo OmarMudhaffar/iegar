@@ -1,5 +1,7 @@
 {
   "name": "fakeNews",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular"
 }

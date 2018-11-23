@@ -1,3 +1,168 @@
 page-home {
+    font-family: 'Cairo', sans-serif;
+}
+
+page-home .toolbar-background-md
+
+{
+background: #fff;
+}
+
+
+page-home .toolbar-title-md {
+    direction: rtl !important;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
+
+page-home .toolbar-title-md p{
+    margin: 0 5px;
+    display: inline-block;
+    }
+    
+    page-home .panel, page-home .mtitle {
+        width: 100%;
+    }
+
+    page-home .panel {
+        text-align: left;
+    }
+
+    page-home .mtitle  {
+        text-align: right;
+    }
+    
+    page-home .panel ion-icon {
+       margin-right: 10px;
+       display: inline-block;
+    }
+
+    page-home .toolbar-md{
+        box-shadow: 0px 0px 1px 0px !important;
+    }
+    
+
+    .header-md {
+        box-shadow: 0px -1px 2px 0px !important;
+    }
+
+    .header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
+        background-image: none !important;
+
+    }
+
+    page-home .orders{
+     display: flex;
+     direction: rtl;
+    }
+
+    page-home .orders button {
+        width: 100%;
+        background: transparent;
+    }
+
+    page-home .card-md {
+        direction: rtl;
+    }
+
+    page-home .imagedev {
+        height: 250px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+    }
+
+    page-home .imagedev .overlay {
+        width: 40%;
+        background: #e00;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #FFF;
+        font-size: 27px;
+        opacity: 0.9;
+    }
+
+    page-home .futures{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+
+    page-home .futures .roms,.tabk,.space {
+      text-align: center;
+    }
+
+    page-home .futures .roms button {
+        background: #FF4136;
+        color: #FFF;
+    }
+
+    page-home .futures .tabk button {
+        background: #39CCCC;
+        color: #FFF;
+    }
+
+    page-home .futures .space button {
+        background: #001f3f;
+        color: #FFF;
+    }
+
+    page-home .futures > div > button {
+        width: 60px;
+      height: 60px;
+      text-align: center;
+      border-radius: 50%;
+      font-weight: 600 !important;
+
+    }
+
+    page-home .futures > div > p {
+        margin-bottom: 10px;
+        margin-top: 3px;
+        
+    }
+
+    page-home .futures > div  {
+      text-align: center;
+      width: 100%;
+    }
+
+
+    .tabs-md .tabbar {
+        direction: rtl !important;
+        box-shadow: 1px 1px 1px 1px;
+        background: #fafafa !important;
+    }
+    
+    .tabs-md .tab-button {
+        color: #000 !important;
+        font-family: 'Cairo', sans-serif;
+    }
+    
+    .tabs-md .tab-button-icon {
+        color: #000 !important;
+    }
+    
+  
+    
+    .tabs-md[tabslayout="icon-top"] .has-icon .tab-button-text {
+    margin: 0 !important;
+    }
+
+    .setdire {
+
+        direction: rtl;
+        font-family: 'Cairo', sans-serif;
+
+
+    }
+
+    .loaddire {
+        font-family: 'Cairo', sans-serif;
+
+    }

@@ -1,0 +1,151 @@
+page-register {
+
+}
+
+
+page-register .father {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cairo', sans-serif;
+
+
+}
+
+
+page-register .father .mcontent {
+    width: 100%;
+    text-align: center;
+    margin: 15px;
+}
+
+page-register .logo {
+    margin-bottom: 20px;
+}
+
+page-register .inputs input{
+
+    width: 100%;
+    padding: 17px;
+    border: 1px solid #CCC;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    direction: rtl;
+    padding-right: 35px;
+}
+
+
+page-register .inputs .username,page-register .inputs .email,page-register .inputs .pass {
+
+    position: relative;
+
+}
+
+page-register .inputs .username input{
+    border-left: 2px solid #1da1f2;
+}
+
+page-register .inputs .email input {
+    border-left: 2px solid #ea4335;
+}
+
+page-register .inputs .pass input {
+    border-left: 2px solid green;
+
+}
+
+page-register .inputs img {
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    top: 20px;
+}
+
+page-register .inputs i {
+    position: absolute;
+    left: 10px;
+    top: 23px;
+    font-size: 16px;
+    color: #636363;
+}
+
+page-register .inputs #hidepass {
+    display: none;
+}
+
+page-register .inputs #hidepassTwo {
+    display: none;
+
+}
+
+page-register .inputs button {
+    padding: 20px;
+}
+
+page-register .sections {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    direction: ltr;
+}
+
+page-register .sections .login {
+   width: 100%;
+   text-align: left;
+}
+
+page-register .sochial {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+
+    align-items: center;
+}
+
+page-register .sochial img {
+    margin-right: 10px;
+    width: 55px;
+    height: 55px;
+}
+
+page-register .sochial .google {
+    background: #ea4335;
+    color: #FFF;
+}
+
+
+page-register .sochial .facebook {
+    background: #4267b2;
+    color: #FFF;
+}
+
+page-register .sochial .twitter {
+    background: #1da1f2;
+    color: #FFF;
+}
+
+page-register .or div{
+width: 100%;
+}
+
+page-register .or .orleft {
+    border: 1px solid #636363;
+    border-bottom: 0px;
+}
+
+page-register .or .orright {
+    border: 1px solid #636363;
+    border-bottom: 0px;
+
+}
+
+page-register .or {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+page-register .loginView {
+    display: none;
+}
