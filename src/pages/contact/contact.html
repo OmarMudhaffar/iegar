@@ -1,17 +1,139 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      
+      <div class="mtitle">
+          <p>الاعلانات المفضلة</p>
+        </div>
+  
+
+    
     </ion-title>
   </ion-navbar>
+
+  <ion-navbar>
+     
+   <div class="orders">
+     <button (click)="selectprev()">{{selectValue}}
+        <ion-icon name="md-arrow-dropdown" style="color:#00e;"></ion-icon>
+     </button>
+
+     <button (click)="selectType()">{{typeSelect}}
+        <ion-icon name="md-arrow-dropdown" style="color:#0e0;"></ion-icon>
+     </button>
+
+   </div>
+
+    </ion-navbar>
+
 </ion-header>
 
+
+  
+  
+
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+
+
+  <div class="waiteload">
+
+    <div class="waite-contetn">
+
+
+      <div class="spinner">
+          <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
+
+      <div class="notfound">
+        <img src="assets/imgs/notfound.svg">
+        <p>لا يوجد عناصر</p>
+      </div>
+
+    </div>
+
+  </div>
+
+    <ion-card *ngFor="let item of list">
+
+        <ion-item>
+            <ion-avatar item-start>
+              <img [src]="item.payload.val().pic">
+            </ion-avatar>
+            <h2>{{item.payload.val().name}}</h2>
+            <p>{{item.payload.val().date}}</p>
+          </ion-item>
+        
+
+        <div class="imagedev" [ngStyle]="{'background-image': 'url(' + item.payload.val().image + ')'}">
+        
+          <div class="overlay">
+            {{item.payload.val().type}}
+          </div>
+
+        </div>
+
+        <ion-card-content>
+          <ion-card-title>
+            {{item.payload.val().title}}
+            <ion-icon name="trash" float-start color="danger" (click)="delete(item.key)"></ion-icon>
+
+            </ion-card-title>
+          
+
+            <ion-item>
+                <img src="assets/imgs/placeholder.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+
+                <h2>{{item.payload.val().prev}}</h2>
+                <p>{{item.payload.val().mntka}}</p>
+              </ion-item>
+
+              <ion-item>
+                  <img src="assets/imgs/money-bag.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                  <h2>{{item.payload.val().price}}</h2>
+                  <p>يمكنك الاتصال لتأكيد السعر</p>
+                </ion-item>
+
+        </ion-card-content>
+
+
+                <div class="futures">
+                    <div class="roms">
+                      <button ion-button color="danger">{{item.payload.val().roms}}</button>
+                      <p>غرف</p>
+                    </div>
+                    <div class="tabk">
+                      <button ion-button color="info">{{item.payload.val().storey}}</button>
+                      <p>طوابق</p>
+                    </div>
+                    <div class="space">
+                      <button ion-button color="dark">{{item.payload.val().space}}</button>
+                      <p>المساحة</p>
+                    </div>
+                </div>
+           
+                <ion-item>
+                  <div class="msection">
+                  
+                  <div>
+                      <button ion-button icon-start clear item-end  (click)="view(item.key,item.payload.val().pic,item.payload.val().name,item.payload.val().date,item.payload.val().type,item.payload.val().title,item.payload.val().prev,item.payload.val().mntka,item.payload.val().price,item.payload.val().roms,item.payload.val().storey,item.payload.val().space,item.payload.val().image,item.payload.val().images,item.payload.val().addr,item.payload.val().phone)" >
+                          معاينة
+                          <ion-icon name="md-navigate"></ion-icon>
+                        </button>
+                  
+                  </div>
+                  <div>
+                      <button ion-button icon-start clear item-start (click)="warn()">
+                          ابلاغ
+                          <ion-icon name="md-warning"></ion-icon>
+                        </button>
+                  </div>
+                  
+
+                  </div>
+                  
+                    </ion-item>
+                  
+
+      </ion-card>
+
 </ion-content>

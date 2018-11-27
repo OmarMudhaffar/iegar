@@ -1,0 +1,117 @@
+<!--
+  Generated template for the ViewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>معاينة الاعلان</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+      <ion-card>
+  
+          <ion-item>
+  
+  
+  
+              <ion-avatar item-start>
+                <img [src]="pic">
+              </ion-avatar>
+              <h2>{{name}}</h2>
+              <p>{{date}}</p>
+            </ion-item>
+          
+  
+          <div >
+          
+            
+            <ion-slides  pager="true" dir="ltr" autoplay="4000" loop="true" speed="2000" paginationType="fraction">
+              <ion-slide *ngFor="let item of donloadImgs">
+               <div class="imagedev"  [ngStyle]="{'background-image': 'url(' + item + ')'}"></div>
+              </ion-slide>
+
+
+            </ion-slides>
+
+          </div>
+  
+          <ion-card-content>
+            <ion-card-title>
+              {{title}}
+              <ion-icon name="ios-bookmark-outline" float-start (click)="saveFav(item.payload.val().pic,item.payload.val().name,item.payload.val().date,item.payload.val().type,item.payload.val().title,item.payload.val().prev,item.payload.val().mntka,item.payload.val().price,item.payload.val().roms,item.payload.val().storey,item.payload.val().space,item.payload.val().image,item.payload.val().images,item.payload.val().addr,item.payload.val().phone)"></ion-icon>
+
+              </ion-card-title>
+            
+  
+              <ion-item>
+                  <img src="assets/imgs/placeholder.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+  
+                  <h2>{{prev}}</h2>
+                  <p>{{mntka}}</p>
+                </ion-item>
+  
+                <ion-item>
+                    <img src="assets/imgs/money-bag.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>{{price}}</h2>
+                    <p>يمكنك الاتصال لتأكيد السعر</p>
+                  </ion-item>
+
+                                
+                  <ion-item>
+                    <img src="assets/imgs/homee.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>نوع العقد</h2>
+                    <p>{{type}} </p>
+
+                  </ion-item>
+
+                  <ion-item>
+                    <img src="assets/imgs/map.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>مكتن البائع</h2>
+                    <p>{{addr}} </p>
+                  </ion-item>
+
+                  <ion-item>
+                    <img src="assets/imgs/smartphone.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>رقم الهاتف</h2>
+                    <p>{{phone}} </p>
+                    <ion-icon name="call" item-end color="primary"></ion-icon>
+
+                  </ion-item>
+
+    
+  
+  
+          </ion-card-content>
+  
+  
+                  <div class="futures">
+                      <div class="roms">
+                        <button ion-button color="danger">{{roms}}</button>
+                        <p>غرف</p>
+                      </div>
+                      <div class="tabk">
+                        <button ion-button color="info">{{storey}}</button>
+                        <p>طوابق</p>
+                      </div>
+                      <div class="space">
+                        <button ion-button color="dark">{{space}}</button>
+                        <p>المساحة</p>
+                      </div>
+                  </div>
+             
+  
+ 
+  
+  
+        </ion-card>
+  
+  </ion-content>
+  
+

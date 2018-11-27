@@ -17,6 +17,10 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RegisterPage } from '../pages/register/register';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { RevrsePipe } from '../pipes/revrse/revrse';
+import { ProfilePage } from '../pages/profile/profile';
+import { EditPage } from '../pages/edit/edit';
+import { ViewPage } from '../pages/view/view';
 
 var config = {
   apiKey: "AIzaSyDml8NAQEvBRQeO_YSY_miPCRmPcuFev9k",
@@ -35,7 +39,11 @@ var config = {
     ContactPage,
     HomePage,
     TabsPage,
-    RegisterPage
+    RegisterPage,
+    RevrsePipe,
+    ProfilePage,
+    EditPage,
+    ViewPage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,10 @@ var config = {
     ContactPage,
     HomePage,
     TabsPage,
-    RegisterPage
+    ProfilePage,
+    RegisterPage,
+    EditPage,
+    ViewPage
   ],
   providers: [
     StatusBar,

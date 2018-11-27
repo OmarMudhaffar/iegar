@@ -165,7 +165,8 @@ export class RegisterPage {
             user.sendEmailVerification().then( ()=> {
               var toast = this.alert.create({
                 subTitle:"تم ارسال رابط التفعيل",
-                buttons:["حسنا"]
+                buttons:["حسنا"],
+                cssClass:"setdire"
               });
               toast.present();
             });

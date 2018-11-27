@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      اضافة اعلان
+      تعديل الاعلان
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -17,7 +17,7 @@
   
       <ion-item>
           <ion-icon name="md-create" item-start></ion-icon>
-          <ion-input placeholder="عنوان المنشور مثال (بيت للايجار)" #title></ion-input>
+          <ion-input placeholder="عنوان المنشور مثال (بيت للايجار)" #titlel [value]="title"></ion-input>
       </ion-item>
 
   <ion-item (click)="selectprev()">
@@ -27,7 +27,7 @@
 
   <ion-item>
     <ion-icon name="map" item-start></ion-icon>
-    <ion-input placeholder="المنطقة" #mntka></ion-input>
+    <ion-input placeholder="المنطقة" #mntkal [value]="mntka"></ion-input>
    </ion-item>
 
    <ion-item (click)="selectType()">
@@ -37,24 +37,24 @@
 
      <ion-item>
         <ion-icon name="contract" item-start></ion-icon>
-    <ion-input placeholder="المساحة" type="number" #space></ion-input>
+    <ion-input placeholder="المساحة" type="number" #spacel [value]="space"></ion-input>
      </ion-item>
 
    <ion-item>
       <ion-icon name="apps" item-start></ion-icon>
-          <ion-input placeholder="عدد الطوابق" type="number" #storey></ion-input>
+          <ion-input placeholder="عدد الطوابق" type="number" #storeyl [value]="storey"></ion-input>
    </ion-item>
 
    <ion-item>
       <ion-icon name="cube" item-start></ion-icon>
-      <ion-input placeholder="عدد الغرف" type="number" #roms></ion-input>
+      <ion-input placeholder="عدد الغرف" type="number" #romsl [value]="roms"> </ion-input>
    </ion-item>
 
 
 
    <ion-item>
       <ion-icon name="card" item-start></ion-icon>
-      <ion-input placeholder="السعر" type="text" #price></ion-input>
+      <ion-input placeholder="السعر" type="text" #pricel [value]="price"></ion-input>
    </ion-item>
 
 
@@ -68,12 +68,12 @@
 
       <ion-item>
           <ion-icon name="pin" item-start></ion-icon>
-          <ion-input placeholder="عنوانك" #addr></ion-input>
+          <ion-input placeholder="عنوانك" #addrl [value]="addr"></ion-input>
       </ion-item>
 
       <ion-item>
           <ion-icon name="phone-portrait" item-start></ion-icon>
-          <ion-input placeholder="رقم الهاتف" type="number" #phone></ion-input>
+          <ion-input placeholder="رقم الهاتف" type="number" #phonel [value]="phone"></ion-input>
        </ion-item>
 
 
@@ -96,7 +96,7 @@
                         <ion-col col-6 class="colheader" (click)="takePhoto()"> 
                           <div class="pic">
                              <img src="assets/imgs/image.svg">
-                          <img *ngIf="image">
+                          
                           </div>
                         </ion-col>
 
@@ -105,7 +105,7 @@
                     </ion-grid>
              
 
-              <button ion-button color="dark" outline full (click)="saveData(title.value,selectValue,mntka.value,typeSelect,space.value,storey.value,roms.value,price.value,addr.value,phone.value)">نشر الاعلان</button>
+              <button ion-button color="dark" outline full (click)="editData(titlel.value,selectValue,mntkal.value,typeSelect,spacel.value,storeyl.value,romsl.value,pricel.value,addrl.value,phonel.value)">نشر الاعلان</button>
             </ion-item>
 
               

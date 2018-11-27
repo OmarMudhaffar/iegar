@@ -1,0 +1,146 @@
+page-view {
+
+}
+
+
+page-view .orders{
+    display: flex;
+    direction: rtl;
+   }
+
+   page-view .orders button {
+       width: 100%;
+       background: transparent;
+   }
+
+   page-view .card-md {
+       direction: rtl;
+   }
+
+   page-view .imagedev {
+       height: 250px;
+       background-size: cover;
+       background-repeat: no-repeat;
+       background-position: top center;
+   }
+
+   page-view .imagedev .overlay {
+       width: 40%;
+       background: #e00;
+       height: 100%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       color: #FFF;
+       font-size: 27px;
+       opacity: 0.9;
+   }
+
+   page-view .futures{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   }
+
+   page-view .futures .roms,.tabk,.space {
+     text-align: center;
+   }
+
+   page-view .futures .roms button {
+       background: #FF4136;
+       color: #FFF;
+   }
+
+   page-view .futures .tabk button {
+       background: #39CCCC;
+       color: #FFF;
+   }
+
+   page-view .futures .space button {
+       background: #001f3f;
+       color: #FFF;
+   }
+
+   page-view .futures > div > button {
+       width: 60px;
+     height: 60px;
+     text-align: center;
+     border-radius: 50%;
+     font-weight: 600 !important;
+
+   }
+
+   page-view .futures > div > p {
+       margin-bottom: 10px;
+       margin-top: 3px;
+       
+   }
+
+   page-view .futures > div  {
+     text-align: center;
+     width: 100%;
+   }
+
+   
+   page-view .select-text {
+    display: none !important;
+}
+
+page-view .orders{
+    .item-md.item-block .item-inner {
+        border-bottom: 0px !important;
+    }
+}
+
+
+page-view .orders .select-md {
+   display: none;
+}
+
+
+page-view {
+    font-family: 'Cairo', sans-serif;
+}
+
+page-view .toolbar-background-md
+
+{
+background: #fff;
+}
+
+
+page-view .toolbar-title-md {
+    direction: rtl !important;
+    text-align: center;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+
+}
+
+page-view .toolbar-title-md p{
+    margin: 0 5px;
+    display: inline-block;
+    }
+    
+    page-view .panel, page-view .mtitle {
+        width: 100%;
+    }
+
+    page-view .panel {
+        text-align: left;
+    }
+
+    page-view .mtitle  {
+        text-align: right;
+    }
+    
+    page-view .panel ion-icon {
+       margin-right: 10px;
+       display: inline-block;
+    }
+
+    page-view .toolbar-md{
+        box-shadow: 0px 0px 1px 0px !important;
+    }
+    

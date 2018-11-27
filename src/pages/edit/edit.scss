@@ -1,3 +1,5 @@
+
+
 @font-face {
     src: url("../../assets/cairo.woff2");
     font-family: "omarReal";
@@ -5,11 +7,11 @@
 }
 
 
-page-about {
+page-edit {
 font-family: "omarReal" !important;
 }
 
-page-about .toolbar-background-md
+page-edit .toolbar-background-md
 
 {
 background: #fff;
@@ -17,22 +19,22 @@ background: #fff;
 
 
 
-page-about .toolbar-title-md {
+page-edit .toolbar-title-md {
     direction: rtl !important;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     padding: 10px
 
 }
 
 
-page-about .list-md {
+page-edit .list-md {
 direction: rtl;
 }
 
-page-about .list-header-md { 
+page-edit .list-header-md { 
 margin: 0px;
 background: #f5f5f5;
 padding: 6px;
@@ -40,15 +42,15 @@ color: #000;
 font-size: 17px;
 }
 
-page-about .text-input-md {
+page-edit .text-input-md {
     direction: rtl;
 }
 
-page-about .text-input-md:focus {
+page-edit .text-input-md:focus {
     border-bottom: 0;
 }
 
-page-about .item-md .item-button {
+page-edit .item-md .item-button {
     padding: 25px;
     font-size: 17px;
     background: transparent;
@@ -58,33 +60,33 @@ page-about .item-md .item-button {
  
 }
 
-page-about .item-md p {
+page-edit .item-md p {
     color: #000;
 }
 
-page-about .icon[item-start], page-about i{
+page-edit .icon[item-start], page-edit i{
 font-size: 25px !important;
 color: #4E6377;
 }
 
 
 
-page-about a {
+page-edit a {
     text-decoration: none;
     color: #000;
 }
 
-page-about  .back-button.show-back-button span {
+page-edit  .back-button.show-back-button span {
     color: #FFF !important;
 }
 
-page-about textarea{
+page-edit textarea{
     width: 100%;
     padding: 7px;
     direction: rtl;
 }
 
-page-about .pic, page-about .pics{
+page-edit .pic, page-edit .pics{
     background: transparent !important;
     width: 100%;
     height: 100px;
@@ -94,23 +96,27 @@ page-about .pic, page-about .pics{
     border: 1px solid #4E6377  ;
 }
 
-page-about .pic img {
+page-edit .pic img {
    width: 50px;
    height: 50px;
 }
 
-page-about .pics img {
+page-edit .pics img {
     width: 100%;
     height: 100%;
 }
 
 
 
-page-about .grid {
+page-edit .grid {
     padding: 0;
 }
 
-page-about .col {
+page-edit .col {
     padding: 0;
 
+}
+
+page-edit .back-button-icon-md {
+    color: #000;
 }
