@@ -17,7 +17,7 @@ export class AboutPage {
   imageSrc;
   imageArray = []
   uploadImages = [];
-  donloadImgs = ["https://b.dmlimg.com/NGE5Y2JlNzJhNjE4NDA0ODU1ZjVhNzJiOTMzYmJkZTbJp4bs8pIhVsz9G-YZKm_-aHR0cDovL3MzLWV1LXdlc3QtMS5hbWF6b25hd3MuY29tL21lZGlhbWFzdGVyLXMzZXUvZS9hL2VhZGQ2NDZkMjhlZmQxNmMwMjk2YjcxY2VjZTIxMjk3LmpwZ3x8fHx8fHx8fHw=.jpg"]; 
+  donloadImgs = []; 
   selectValue = "المحافظة"
   typeSelect = "نوع العقد"
   userinfo = {

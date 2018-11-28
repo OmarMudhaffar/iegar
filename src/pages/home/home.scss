@@ -29,14 +29,18 @@ page-home .toolbar-title-md p{
 
     page-home .panel {
         text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 
     page-home .mtitle  {
         text-align: right;
     }
     
-    page-home .panel ion-icon {
+    page-home .panel img {
        margin-right: 10px;
+
        display: inline-block;
     }
 
@@ -141,12 +145,12 @@ page-home .toolbar-title-md p{
     }
     
     .tabs-md .tab-button {
-        color: #000 !important;
+        color: #333 !important;
         font-family: 'Cairo', sans-serif;
     }
     
     .tabs-md .tab-button-icon {
-        color: #000 !important;
+        color: #333 !important;
     }
 
 

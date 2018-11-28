@@ -17,9 +17,17 @@ export class MyApp {
     public auth : AngularFireAuth) {
 
     auth.authState.subscribe(user => {
+      
+      if(user != undefined){
+        if(!user.emailVerified){
+          this.rootPage = RegisterPage
+      }
+      }
+
       if(user == undefined){
         this.rootPage = RegisterPage
       }
+
     })
 
 

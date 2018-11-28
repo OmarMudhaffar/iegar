@@ -138,7 +138,7 @@ export class HomePage {
          
     if(this.typeSelect == "ملك وايجار"){
       var myf = this.list.filter(f => {
-        return f.payload.val['prev'] == this.selectValue
+        return f.payload.val()['prev'] == this.selectValue
       });
 
       this.list = myf;
@@ -195,6 +195,7 @@ export class HomePage {
          
             if(this.selectValue != "جميع المحافضات"){
               var myf = this.list.filter(f => {
+
                 return f.payload.val()['prev'] == this.selectValue && f.payload.val()['type'] == "ملك"
                 
               });
@@ -202,6 +203,7 @@ export class HomePage {
 
             if(this.selectValue == "جميع المحافضات"){
               var myf = this.list.filter(f => {
+
                 return f.payload.val()['type'] == "ملك"             
               });
             }

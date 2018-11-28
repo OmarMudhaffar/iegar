@@ -73,7 +73,7 @@
 
                   <ion-item>
                     <img src="assets/imgs/map.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
-                    <h2>مكتن البائع</h2>
+                    <h2>مكان البائع</h2>
                     <p>{{addr}} </p>
                   </ion-item>
 
@@ -81,7 +81,7 @@
                     <img src="assets/imgs/smartphone.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
                     <h2>رقم الهاتف</h2>
                     <p>{{phone}} </p>
-                    <ion-icon name="call" item-end color="primary"></ion-icon>
+                    <ion-icon name="call" item-end color="primary" (click)="call(phone)"></ion-icon>
 
                   </ion-item>
 

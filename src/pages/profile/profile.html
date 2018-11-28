@@ -1,47 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      
+راسل الدعم
+
+    
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
 
 
-<ion-content >
+<div class="mcont">
 
-  <div class="mheader">
+<div class="father">
 
- <div class="logo">
- 
-  <img src="https://instagram.fbgw4-1.fna.fbcdn.net/vp/660586d3a9e5f9f615566878434806d2/5C7E2A70/t51.2885-19/11899519_1598363363758766_1939716899_a.jpg">
-  <p>تعديل الصورة</p>
- </div>
+<div class="logo">
 
-      <div class="overlay"></div>
-    <div class="headback"></div>
-  </div>
+<img src="assets/imgs/team.svg">
 
+</div>
 
-  <div class="inputs">
-    <div class="username">
-      <img src="assets/imgs/boy.svg">
+<div class="inputs">
 
-      <input type="text" placeholder="اسم المستخدم" id="username" #namereg onkeypress="return (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || (event.charCode >= 48 && event.charCode <= 57)" >
-  </div>
+<textarea placeholder="رسالتك" #msg></textarea>
+<button (click)="send(msg.value)">ارسال</button>
 
-  <div class="email">
-    <img src="assets/imgs/email.svg">
-      <input type="number" placeholder="رقم الهاتف" #emailreg>
-  </div>
+</div>
 
-  <div class="pass">
-      <img src="assets/imgs/key.svg">
-      <input type="text" placeholder="العنوان" id="password" #passreg>
-      <i class="fa fa-eye" aria-hidden="true" id="showpass" (click)="shoEye()" ></i>
-      <i class="fa fa-eye-slash" aria-hidden="true" id="hidepass" (click)="hideEye()"></i>
+</div>
 
-  </div>
-
-  <div class="sections">
-          <div class="login">
-                  <p (click)="viewLogin()" >لديك حساب؟</p>
-          </div>
-          <button color="dark" ion-button outline (click)="register(emailreg.value,namereg.value,passreg.value)" >انشاء حساب</button>
-          
-  </div>
-  </div>
-
+</div>
+  
 </ion-content>

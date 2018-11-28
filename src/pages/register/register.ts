@@ -197,8 +197,9 @@ export class RegisterPage {
         if(userche[0] != undefined){
           load.dismiss();
           var toast = this.alert.create({
-            subTitle :"ايم المستخدم محجوز",
-            buttons:["ok"]
+            subTitle :"اسم المستخدم محجوز",
+            buttons:["ok"],
+            cssClass:"setdire"
           });
           toast.present();
         }

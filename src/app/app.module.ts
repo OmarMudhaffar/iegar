@@ -8,6 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { CallNumber } from '@ionic-native/call-number';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, } from '@angular/fire/database';
@@ -69,6 +70,7 @@ var config = {
     StatusBar,
     SplashScreen,
     Camera,
+    CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
