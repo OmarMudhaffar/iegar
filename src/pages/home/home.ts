@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, ActionSheetController, ToastController } from 'ionic-angular';
+import { NavController, AlertController, ActionSheetController, ToastController, LoadingController, Platform } from 'ionic-angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as $ from 'jquery'
 import { EditPage } from '../edit/edit';
 import { ViewPage } from '../view/view';
+import * as firebase from 'firebase/app';
+import { CameraOptions, Camera } from '@ionic-native/camera';
 
 @Component({
   selector: 'page-home',
@@ -18,17 +20,29 @@ export class HomePage {
   typeSelect = "ملك وايجار"
   storeyg = "جميع الطوابق"
   email
-
+ image = "assets/imgs/boy.svg"
+ mySelectedPhoto;
+ loading;
+ currentPhoto ;
+ imgSource;;
 
   constructor(public navCtrl: NavController,public auth : AngularFireAuth,
     public alert : AlertController,public db : AngularFireDatabase,
-    public ac : ActionSheetController,public toast : ToastController) {
+    public ac : ActionSheetController,public toast : ToastController,
+    private camera:Camera,
+    public load : LoadingController
+) {
 
+  $(document).on('offline online', function (event) {
+    console.log('You are ' + event.type + '!');
+});
 
-
-      auth.authState.subscribe(user => {
+auth.authState.subscribe(user => {
         if(user != undefined){
           this.email = user.email
+          db.list("users",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
+            this.image = data[0]['image']
+          })
         }
       })
 
@@ -46,6 +60,8 @@ export class HomePage {
 
 
   }
+
+
 
 
   ngOnInit(){
@@ -423,4 +439,116 @@ export class HomePage {
     }
 
 
+
+    takePhoto(){
+      const options: CameraOptions = {
+        targetHeight:420,
+        targetWidth:420,
+        destinationType : this.camera.DestinationType.DATA_URL,
+        encodingType:this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE,
+        sourceType:this.camera.PictureSourceType.PHOTOLIBRARY
+      }
+      
+      this.camera.getPicture(options).then((imageData) =>{
+        this.loading = this.load.create({
+          content: "جاري تبديل الصورة ",
+          cssClass:"loaddire"
+           });
+    this.loading.present();
+      this.mySelectedPhoto = this.dataURLtoBlob('data:image/jpeg;base64,'+imageData);
+          this.upload();
+              
+              },(err)=>{
+          console.log(err);
+              });
+      
+      
+      }
+      
+          
+          
+      dataURLtoBlob(myURL){
+          let binary = atob(myURL.split(',')[1]);
+      let array = [];
+      for (let i = 0 ; i < binary.length;i++){
+          array.push(binary.charCodeAt(i));
+      }
+          return new Blob([new Uint8Array(array)],{type:'image/jpeg'});
+      }    
+          
+          
+      upload(){
+      if(this.mySelectedPhoto){
+          var uploadTask = firebase.storage().ref().child('images/'+this.auth.auth.currentUser.email+".jpg");
+          var put = uploadTask.put(this.mySelectedPhoto);
+          put.then(this.onSuccess,this.onErrors);
+    
+          var sub = this.db.list("users",ref => ref.orderByChild("email").equalTo(this.auth.auth.currentUser.email)).snapshotChanges().subscribe(data => {
+    
+            uploadTask.getDownloadURL().then(url =>{
+              
+              
+              this.db.list("users").update(data[0].payload.key,{
+                image:url
+              }).then( ()=> {
+                
+                
+     
+                var cont = this.db.list("house",ref => ref.orderByChild("email").equalTo(this.auth.auth.currentUser.email)).snapshotChanges().subscribe(vdata => {
+    
+                  vdata.forEach(vimgs => {
+    
+                    this.db.list("house").update(vimgs.key,{
+                      pic:url,
+                    }).then( ()=> {
+                      
+                      cont.unsubscribe()
+                    
+
+                    })
+    
+                  });
+    
+                });
+    
+              })
+    
+          
+              
+            });
+    
+    
+          });
+          
+          
+      }
+      }    
+          
+      onSuccess=(snapshot)=>{
+          this.currentPhoto = snapshot.downloadURL;
+    
+          this.loading.dismiss();
+
+      } 
+          
+      onErrors=(error)=>{
+    
+          this.loading.dismiss();
+    
+    
+      }   
+          
+      getMyURL(){
+          firebase.storage().ref().child('images/'+this.auth.auth.currentUser.email+".jpg").getDownloadURL().then((url)=>{
+              this.imgSource = url;
+              
+              })
+      }
+          
+          
+
+
 }
+
+

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RevrsePipe } from './revrse/revrse';
+import { ReversePipe } from './reverse/reverse';
 @NgModule({
-	declarations: [RevrsePipe],
+	declarations: [RevrsePipe,
+    ReversePipe],
 	imports: [],
-	exports: [RevrsePipe]
+	exports: [RevrsePipe,
+    ReversePipe]
 })
 export class PipesModule {}

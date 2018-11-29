@@ -6,6 +6,9 @@
           <p>ايجار</p>
         </div>
   
+        <div class="userlogo"><img [src]="image" (click)="takePhoto()"/>
+        </div>
+
        <div class="panel">
   
         <img src="assets/imgs/log-out.svg" width="20" height="20" (click)="logout()">
@@ -57,7 +60,7 @@
 
   </div>
 
-    <ion-card *ngFor="let item of list">
+    <ion-card *ngFor="let item of list | revrse">
 
         <ion-item>
 

@@ -179,7 +179,7 @@ export class AboutPage {
   ];
   
 
-  if(title.length > 0 && prev.length > 0 && mntka.length > 0 && type.length > 0 && space.length > 0 && storey.length > 0 && roms.length > 0 && price.length > 0 && addr.length > 0 && phone.length > 0 && this.donloadImgs[0] != undefined){
+  if(title.length > 0 && prev != "المحافظة" && mntka.length > 0 && type != "نوع العقد" && space.length > 0 && storey.length > 0 && roms.length > 0 && price.length > 0 && addr.length > 0 && phone.length > 0 && this.donloadImgs[0] != undefined){
 
 
    this.db.list("house").push({

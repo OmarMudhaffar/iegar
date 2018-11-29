@@ -330,3 +330,16 @@ page-home .msection .warm ion-icon{
 page-home .msection .warm {
     text-align: left;
 }
+
+page-home .userlogo {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+page-home .userlogo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
