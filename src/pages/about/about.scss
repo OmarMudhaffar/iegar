@@ -58,6 +58,32 @@ page-about .item-md .item-button {
  
 }
 
+page-about .toolbar-title-md p{
+    margin: 0 5px;
+    display: inline-block;
+    }
+    
+    page-about .panel, page-about .mtitle {
+        width: 100%;
+    }
+
+    page-about .panel {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    page-about .mtitle  {
+        text-align: right;
+    }
+    
+    page-about .panel img {
+       margin-right: 10px;
+
+       display: inline-block;
+    }
+
 page-about .item-md p {
     color: #000;
 }
@@ -110,3 +136,10 @@ page-about .grid {
     padding: 0;
 }
 
+
+page-about .savedata {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #001f3f;
+    padding: 15px;
+}

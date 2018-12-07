@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../home/home';
 import * as $ from 'jquery'
 import { Geolocation } from '@ionic-native/geolocation';
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'page-about',
@@ -45,9 +46,6 @@ export class AboutPage {
 
   
   ngOnInit(){
-    $("input").keypress(function(ms){
-      console.log("ghi")
-    })
 
   }
   
@@ -177,7 +175,6 @@ export class AboutPage {
 
  saveData(title,prev,mntka,type,space,storey,roms,price,addr,phone){
 
-  
 
   var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
   var rand1 = Math.floor(Math.random() * char.length);
@@ -194,9 +191,10 @@ export class AboutPage {
   ];
   
 
-  if(title.length > 0 && prev != "المحافظة" && mntka.length > 0 && type != "نوع العقد" && space.length > 0 && storey.length > 0 && roms.length > 0 && price.length > 0 && addr.length > 0 && phone.length > 0 && this.donloadImgs[0] != undefined){
+  if(this.donloadImgs[0] != undefined){
     
-  if (title.replace(/\s/g,"") != ""  && mntka.replace(/\s/g,"") != "" && space > 0 && storey.replace(/\s/g,"") != "" && roms > 0 && price > 0 && phone > 0 && addr.replace(/\s/g,"") != ""){
+    if (space > 0 &&  storey > 0 && roms > 0 && phone > 0 && prev != "المحافظة" && type != "نوع العقد"  && title.replace(/\s/g,"") != "" && mntka.replace(/\s/g,"") != "" && addr.replace(/\s/g,"") != ""  && price.replace(/\s/g,"") != ""){
+
 
    this.gps.getCurrentPosition().then(gp => {
      
@@ -244,5 +242,8 @@ export class AboutPage {
  }
 }
 
+support(){
+  this.navCtrl.push(ProfilePage);
+}
 
 }

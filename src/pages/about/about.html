@@ -1,8 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      اضافة اعلان
-    </ion-title>
+      <div class="mtitle">
+        <p>اضافة اعلان</p>
+      </div>
+
+ 
+     <div class="panel">
+
+      <img src="assets/imgs/support.svg" width="20" height="20" (click)="support()">
+
+     </div>    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +25,7 @@
   
       <ion-item>
           <ion-icon name="md-create" item-start></ion-icon>
-          <ion-input placeholder="عنوان المنشور مثال (بيت للايجار)" #title></ion-input>
+          <ion-input placeholder="عنوان المنشور مثال (بيت للايجار)" #title id="mtitle"></ion-input>
       </ion-item>
 
   <ion-item (click)="selectprev()">
@@ -100,13 +108,18 @@
                               </div>
                             </ion-col>
 
+                      </ion-row>
 
+                      <ion-row>
+                        <ion-col>
+                          <button class="savedata" color="dark" outline full (click)="saveData(title.value,selectValue,mntka.value,typeSelect,space.value,storey.value,roms.value,price.value,addr.value,phone.value)">نشر الاعلان</button>
+
+                        </ion-col>
                       </ion-row>
                 
                     </ion-grid>
              
 
-              <button ion-button color="dark" outline full (click)="saveData(title.value,selectValue,mntka.value,typeSelect,space.value,storey.value,roms.value,price.value,addr.value,phone.value)">نشر الاعلان</button>
             </ion-item>
 
               

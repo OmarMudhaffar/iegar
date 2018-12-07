@@ -73,8 +73,8 @@ export class MapPage {
           mydata.forEach(data => {
   
             map.addMarker({
-          title: "عقار",
-          icon: "red",
+          title: data['title'],
+          icon: "yellow",
           animation: 'DROP',
           position: {
             lat: data['lat'],
