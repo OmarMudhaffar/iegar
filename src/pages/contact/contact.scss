@@ -144,31 +144,30 @@ page-contact .toolbar-title-md p{
     }
 
     
-
-page-contact .msection {
-    border-top: 1px solid #aaa;
-    padding-top: 5px;
-    display: flex;
-    align-items: center;
-}
-
-page-contact .msection div {
-    width: 100%;
-}
-
-page-contact .msection button {
-    color: #001f3f !important;
-font-size: 15px !important;
-}
-
-page-contact .msection ion-icon {
-    color: #39CCCC;
-}
-
-page-contact .msection .warm ion-icon{
-    color: #FF4136 !important;
-}
-
-page-contact .msection .warm {
-    text-align: left;
-}
+    page-contact .msection {
+        border-top: 1px solid #aaa;
+        padding-top: 5px;
+        display: flex;
+        align-items: center;
+    }
+    
+    page-contact .msection div {
+        width: 100%;
+    }
+    
+    page-contact .msection button {
+        color: #001f3f !important;
+    font-size: 15px !important;
+    }
+    
+    page-contact .msection ion-icon {
+        color: #39CCCC;
+    }
+    
+    page-contact .msection .warm ion-icon{
+        color: #FF4136 !important;
+    }
+    
+    page-contact .msection .warm {
+        text-align: left;
+    }

@@ -215,7 +215,8 @@ export class EditPage {
       
         if(title.length > 0 && prev.length > 0 && mntka.length > 0 && type.length > 0 && space.length > 0 && storey.length > 0 && roms.length > 0 && price.length > 0 && addr.length > 0 && phone.length > 0 && this.donloadImgs[0] != undefined){
       
-      
+          if (title.replace(/\s/g,"") != ""  && mntka.replace(/\s/g,"") != "" && space > 0 && storey.replace(/\s/g,"") != "" && roms > 0 && price > 0 && phone > 0 && addr.replace(/\s/g,"") != ""){
+
          this.db.list("house").update(this.key,{
          title:title,
          prev:prev,
@@ -241,6 +242,7 @@ export class EditPage {
         this.navCtrl.pop();
          })
       
+        }
       
         }   
        }

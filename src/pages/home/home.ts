@@ -7,6 +7,7 @@ import { EditPage } from '../edit/edit';
 import { ViewPage } from '../view/view';
 import * as firebase from 'firebase/app';
 import { CameraOptions, Camera } from '@ionic-native/camera';
+import { RegisterPage } from '../register/register';
 
 @Component({
   selector: 'page-home',
@@ -32,6 +33,13 @@ export class HomePage {
     private camera:Camera,
     public load : LoadingController
 ) {
+
+  auth.authState.subscribe(data => {
+    if(data == undefined){
+      navCtrl.setRoot(RegisterPage);
+      navCtrl.goToRoot;
+    }
+  })
 
   $(document).on('offline online', function (event) {
     console.log('You are ' + event.type + '!');
@@ -79,7 +87,6 @@ auth.authState.subscribe(user => {
    cssClass:"setdire",
    buttons:[{text:"خروج",handler: ()=>{
     this.auth.auth.signOut();
-
    } },"الغاء"]
   });
 
@@ -163,6 +170,7 @@ auth.authState.subscribe(user => {
 
     if(this.typeSelect == "ملك"){
       var myf = this.list.filter(f => {
+        
         
         return f.payload.val()['prev'] == this.selectValue && f.payload.val()['type'] == "ملك"
       });
@@ -399,7 +407,7 @@ auth.authState.subscribe(user => {
     }
 
 
-    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone){
+    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone,lat,lng){
 
       this.navCtrl.push(ViewPage,{
         name:name,
@@ -417,7 +425,9 @@ auth.authState.subscribe(user => {
         phone:phone,
         images:images,
         image:image,
-        date: date
+        date: date,
+        lat:lat,
+        lng:lng
       })
 
     }

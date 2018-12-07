@@ -21,6 +21,8 @@ import { RevrsePipe } from '../pipes/revrse/revrse';
 import { ProfilePage } from '../pages/profile/profile';
 import { EditPage } from '../pages/edit/edit';
 import { ViewPage } from '../pages/view/view';
+import { Geolocation } from '@ionic-native/geolocation';
+import { MapPage } from '../pages/map/map';
 
 var config = {
   apiKey: "AIzaSyDml8NAQEvBRQeO_YSY_miPCRmPcuFev9k",
@@ -43,7 +45,8 @@ var config = {
     RevrsePipe,
     ProfilePage,
     EditPage,
-    ViewPage
+    ViewPage,
+    MapPage
   ],
   imports: [
     BrowserModule,
@@ -63,12 +66,14 @@ var config = {
     ProfilePage,
     RegisterPage,
     EditPage,
-    ViewPage
+    ViewPage,
+    MapPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
+    Geolocation,
     CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]

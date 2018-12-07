@@ -3,6 +3,7 @@ import { NavController, AlertController, ActionSheetController, ToastController 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as $ from 'jquery'
+import { ViewPage } from '../view/view';
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
@@ -299,5 +300,29 @@ export class ContactPage {
       alert.present();
     }
 
+
+     
+    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone){
+
+      this.navCtrl.push(ViewPage,{
+        name:name,
+        key:key,
+        pic:pic,
+        title:title,
+        prev:prev,
+        mntka:mntka,
+        type:type,
+        space:space,
+        storey:storey,
+        roms:reoms,
+        price:price,
+        addr:addr,
+        phone:phone,
+        images:images,
+        image:image,
+        date: date
+      })
+
+    }
 
 }

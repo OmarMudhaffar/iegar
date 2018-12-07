@@ -5,6 +5,8 @@ import * as firebase from 'firebase/app';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../home/home';
+import * as $ from 'jquery'
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-about',
@@ -28,7 +30,7 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController,private camera:Camera, public load : LoadingController,
     public db : AngularFireDatabase,public auth : AngularFireAuth,public toast : ToastController,
-    public ac : ActionSheetController) {
+    public ac : ActionSheetController, public gps : Geolocation) {
    auth.authState.subscribe(user => {
      if(user != undefined){
        this.userinfo.email = user.email
@@ -38,6 +40,15 @@ export class AboutPage {
        })
      }
    })
+  }
+
+
+  
+  ngOnInit(){
+    $("input").keypress(function(ms){
+      console.log("ghi")
+    })
+
   }
   
   selectType(){
@@ -162,7 +173,11 @@ export class AboutPage {
       actionSheet.present();
     }
 
+
+
  saveData(title,prev,mntka,type,space,storey,roms,price,addr,phone){
+
+  
 
   var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
   var rand1 = Math.floor(Math.random() * char.length);
@@ -180,39 +195,54 @@ export class AboutPage {
   
 
   if(title.length > 0 && prev != "المحافظة" && mntka.length > 0 && type != "نوع العقد" && space.length > 0 && storey.length > 0 && roms.length > 0 && price.length > 0 && addr.length > 0 && phone.length > 0 && this.donloadImgs[0] != undefined){
+    
+  if (title.replace(/\s/g,"") != ""  && mntka.replace(/\s/g,"") != "" && space > 0 && storey.replace(/\s/g,"") != "" && roms > 0 && price > 0 && phone > 0 && addr.replace(/\s/g,"") != ""){
 
-
+   this.gps.getCurrentPosition().then(gp => {
+     
    this.db.list("house").push({
-   name:this.userinfo.name,
-   email:this.userinfo.email,
-   pic:this.userinfo.profile,
-   title:title,
-   prev:prev,
-   mntka:mntka,
-   type:type,
-   space:space,
-   storey:storey,
-   roms:roms,
-   price:price,
-   addr:addr,
-   id:rand,
-   phone:phone,
-   images:this.donloadImgs,
-   image:this.donloadImgs[0],
-   date: monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
-   }).then( ()=> {
-  var toast = this.toast.create({
-    message:"تم نشر الاعلان",
-    cssClass:"setdire",
-    duration:3000
-  })
-  toast.present();
-  this.navCtrl.setRoot(HomePage);
-  this.navCtrl.goToRoot;
+    name:this.userinfo.name,
+    email:this.userinfo.email,
+    pic:this.userinfo.profile,
+    title:title,
+    prev:prev,
+    mntka:mntka,
+    type:type,
+    space:space,
+    storey:storey,
+    roms:roms,
+    price:price,
+    addr:addr,
+    id:rand,
+    lng:gp.coords.longitude,
+    lat:gp.coords.latitude,
+    phone:phone,
+    images:this.donloadImgs,
+    image:this.donloadImgs[0],
+    date: monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
+    }).then( ()=> {
+   var toast = this.toast.create({
+     message:"تم نشر الاعلان",
+     cssClass:"setdire",
+     duration:3000
+   })
+   toast.present();
+   this.navCtrl.setRoot(HomePage);
+   this.navCtrl.goToRoot;
+    })
+ 
    })
 
 
-  }   
+ }else{
+   this.toast.create({
+     message:"اكمل الحقول بشكل صحيح",
+     cssClass:"setdire",
+     duration:3000
+   }).present();
  }
+ }
+}
+
 
 }

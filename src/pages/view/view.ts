@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams,AlertController,ToastController } f
 import { ViewChild } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { CallNumber } from '@ionic-native/call-number';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { Slides } from 'ionic-angular';
 /**
@@ -40,9 +41,12 @@ export class ViewPage {
   date
   prev
   type
+  lat
+  lng
 
   constructor(public navCtrl: NavController, public params: NavParams,public alert : AlertController,
-    public toast : ToastController,public db : AngularFireDatabase,private callNumber: CallNumber) {
+    public toast : ToastController,public db : AngularFireDatabase,private callNumber: CallNumber,
+    public gps : Geolocation) {
 
     this.name = params.get("name");
     this.key= params.get("key");
@@ -61,6 +65,8 @@ export class ViewPage {
     this.donloadImgs= params.get("images");
     this.image= params.get("image");
     this.date= params.get("date");
+    this.lat= params.get("lat");
+    this.lng= params.get("lng");
 
 
 
@@ -131,5 +137,10 @@ export class ViewPage {
       this.callNumber.callNumber(number, true)
     }
 
+    locate(lat,lng){
+
+       window.location.href = "https://www.google.com/maps?q="+ lat + "," + lng + "&z=18"
+
+    }
 
 }
