@@ -23,6 +23,9 @@ import { EditPage } from '../pages/edit/edit';
 import { ViewPage } from '../pages/view/view';
 import { Geolocation } from '@ionic-native/geolocation';
 import { MapPage } from '../pages/map/map';
+import { ViewgpsPage } from '../pages/viewgps/viewgps';
+import { DNS } from '@ionic-native/dns';
+import { OneSignal } from '@ionic-native/onesignal';
 
 var config = {
   apiKey: "AIzaSyDml8NAQEvBRQeO_YSY_miPCRmPcuFev9k",
@@ -46,7 +49,8 @@ var config = {
     ProfilePage,
     EditPage,
     ViewPage,
-    MapPage
+    MapPage,
+    ViewgpsPage
   ],
   imports: [
     BrowserModule,
@@ -67,12 +71,15 @@ var config = {
     RegisterPage,
     EditPage,
     ViewPage,
-    MapPage
+    MapPage,
+    ViewgpsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
+    DNS,
+    OneSignal,
     Geolocation,
     CallNumber,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

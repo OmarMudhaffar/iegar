@@ -8,6 +8,8 @@ import { ViewPage } from '../view/view';
 import * as firebase from 'firebase/app';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { RegisterPage } from '../register/register';
+import { DNS } from '@ionic-native/dns';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-home',
@@ -31,41 +33,64 @@ export class HomePage {
     public alert : AlertController,public db : AngularFireDatabase,
     public ac : ActionSheetController,public toast : ToastController,
     private camera:Camera,
-    public load : LoadingController
-) {
+    public load : LoadingController,private dns: DNS,public onSignal : OneSignal) {
 
-  auth.authState.subscribe(data => {
-    if(data == undefined){
-      navCtrl.setRoot(RegisterPage);
-      navCtrl.goToRoot;
-    }
+  var malert = alert.create({
+    subTitle:"حدث خطأ",
+    message:"تحقق من اتصالك بلانترنت م اعد المحاولة",
+    cssClass:"setdire",
+    enableBackdropDismiss:false
+    
   })
 
-  $(document).on('offline online', function (event) {
-    console.log('You are ' + event.type + '!');
-});
+  var host = "www.google.com";
 
-auth.authState.subscribe(user => {
-        if(user != undefined){
-          this.email = user.email
-          db.list("users",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
-            this.image = data[0]['image']
-          })
-        }
-      })
+  this.dns.resolve(host).then(addr => {
 
-       db.list("house").snapshotChanges().subscribe(data => {
-         $("page-home .spinner").hide();
-         if(data[0] == undefined){
-           $("page-home .notfound").show();
-         }
-         if(data[0] != undefined){
-          $("page-home .waiteload").hide();
-        }
-         this.list = data;
-         this.homelist = data;
-       });
+    malert.dismiss();
 
+    auth.authState.subscribe(data => {
+      if(data == undefined){
+        navCtrl.setRoot(RegisterPage);
+        navCtrl.goToRoot;
+      }
+    })
+  
+    
+  
+    $(document).on('offline online', function (event) {
+      console.log('You are ' + event.type + '!');
+  });
+  
+  auth.authState.subscribe(user => {
+          if(user != undefined){
+            this.email = user.email
+            db.list("users",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
+              this.image = data[0]['image']
+            })
+          }
+        })
+  
+         db.list("house").snapshotChanges().subscribe(data => {
+           $("page-home .spinner").hide();
+           if(data[0] == undefined){
+             $("page-home .notfound").show();
+           }
+           if(data[0] != undefined){
+            $("page-home .waiteload").hide();
+          }
+           this.list = data;
+           this.homelist = data;
+         });
+  
+
+  },err => {
+
+    malert.present();
+
+  })
+
+  
 
   }
 

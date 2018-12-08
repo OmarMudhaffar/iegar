@@ -6,6 +6,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { Slides } from 'ionic-angular';
+import { ViewgpsPage } from '../viewgps/viewgps';
 /**
  * Generated class for the ViewPage page.
  *
@@ -137,9 +138,13 @@ export class ViewPage {
       this.callNumber.callNumber(number, true)
     }
 
-    locate(lat,lng){
+    locate(lat,lng,title){
 
-       window.location.href = "https://www.google.com/maps?q="+ lat + "," + lng + "&z=18"
+      this.navCtrl.push(ViewgpsPage,{
+        lat:lat,
+        lng:lng,
+        title:title
+      })
 
     }
 

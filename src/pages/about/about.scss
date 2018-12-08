@@ -17,15 +17,43 @@ background: #fff;
 
 
 
+
 page-about .toolbar-title-md {
     direction: rtl !important;
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px
 
 }
+
+page-about .toolbar-title-md p{
+    margin: 0 5px;
+    display: inline-block;
+    }
+    
+    page-about .panel, page-about .mtitle {
+        width: 100%;
+    }
+
+    page-about .panel {
+        text-align: left;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    page-about .mtitle  {
+        text-align: right;
+    }
+    
+    page-about .panel img {
+       margin-right: 10px;
+       display: inline-block;
+    }
+
+
+    
 
 
 page-about .list-md {
@@ -57,11 +85,6 @@ page-about .item-md .item-button {
     margin-top: 15px;
  
 }
-
-page-about .toolbar-title-md p{
-    margin: 0 5px;
-    display: inline-block;
-    }
     
     page-about .panel, page-about .mtitle {
         width: 100%;

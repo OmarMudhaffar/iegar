@@ -5,9 +5,9 @@ import * as firebase from 'firebase/app';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HomePage } from '../home/home';
-import * as $ from 'jquery'
 import { Geolocation } from '@ionic-native/geolocation';
 import { ProfilePage } from '../profile/profile';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-about',
@@ -31,7 +31,8 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController,private camera:Camera, public load : LoadingController,
     public db : AngularFireDatabase,public auth : AngularFireAuth,public toast : ToastController,
-    public ac : ActionSheetController, public gps : Geolocation) {
+    public ac : ActionSheetController, public gps : Geolocation,public oneSignal: OneSignal) {
+
    auth.authState.subscribe(user => {
      if(user != undefined){
        this.userinfo.email = user.email
@@ -227,6 +228,34 @@ export class AboutPage {
    toast.present();
    this.navCtrl.setRoot(HomePage);
    this.navCtrl.goToRoot;
+
+
+
+   this.db.list("ids").valueChanges().subscribe( ids => {
+
+    ids.forEach(id => {
+
+
+      if(id['email'] != this.auth.auth.currentUser.email){
+        this.oneSignal.postNotification({
+          app_id:"6bb2ae4a-0c5f-4c3c-85b4-1648d4d8929c",
+          include_player_ids:[id['id']],
+          contents: {
+            en: "بسعر : " + price
+          },
+          headings: {
+            en: title
+          }
+        })
+      }
+
+     
+    })
+
+  })
+
+
+
     })
  
    })
