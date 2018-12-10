@@ -26,6 +26,9 @@ import { MapPage } from '../pages/map/map';
 import { ViewgpsPage } from '../pages/viewgps/viewgps';
 import { DNS } from '@ionic-native/dns';
 import { OneSignal } from '@ionic-native/onesignal';
+import { GooglePlus } from '@ionic-native/google-plus';
+import firebase from 'firebase';
+import { Facebook } from '@ionic-native/facebook';
 
 var config = {
   apiKey: "AIzaSyDml8NAQEvBRQeO_YSY_miPCRmPcuFev9k",
@@ -36,6 +39,7 @@ var config = {
   messagingSenderId: "1098066924806"
 };
 
+firebase.initializeApp(config);
 
 @NgModule({
   declarations: [
@@ -79,9 +83,11 @@ var config = {
     SplashScreen,
     Camera,
     DNS,
+    GooglePlus,
     OneSignal,
     Geolocation,
     CallNumber,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

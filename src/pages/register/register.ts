@@ -4,6 +4,9 @@ import * as $ from 'jquery'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { TabsPage } from '../tabs/tabs';
 import { AngularFireDatabase } from '@angular/fire/database';
+import firebase from 'firebase';
+import { GooglePlus } from '@ionic-native/google-plus';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 
 /**
@@ -23,7 +26,7 @@ export class RegisterPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public load : LoadingController,public auth : AngularFireAuth,
     public toast : ToastController,public alert : AlertController,
-    public db : AngularFireDatabase) {
+    public db : AngularFireDatabase,private googlePlus: GooglePlus,private fb: Facebook) {
   }
 
   ionViewDidLoad() {
@@ -238,5 +241,120 @@ export class RegisterPage {
       $("#showpassTwo").show();
       $("#passwordTwo").attr("type","password");
     }
+
+
+    
+  singUpGoogle(){
+
+    var load = this.load.create({
+      content:"جاري المعالجة",
+      cssClass:"loaddire"
+    });
+
+    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+        var rand1 = Math.floor(Math.random() * char.length);
+        var rand2 = Math.floor(Math.random() * char.length);
+        var rand3 = Math.floor(Math.random() * char.length);
+        var rand4 = Math.floor(Math.random() * char.length);
+        var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+
+    this.googlePlus.login({
+      'webClientId':"1098066924806-8t5e8e5mfagramclrpdqsds836gvtqp7.apps.googleusercontent.com",
+      'offline':true
+    }).then(res => {
+
+      load.present();
+
+      firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken)).then(suc => {
+        
+        load.dismiss();
+
+        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.goToRoot;
+
+        this.db.list("users",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(usercheck => {
+          
+          if(usercheck[0] == undefined){
+
+            this.db.list("users").push({
+              email:res.email,
+              name:res.displayName,
+              id:rand,
+              image:res.imageUrl,
+            })
+          
+        }
+
+        })
+
+      }).catch(err => {
+        console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+      })
+    })
+  }
+
+
+
+  fblogin(){
+
+    var load = this.load.create({
+      content:"جاري المعالجة",
+      cssClass:"dirion"
+    });
+
+    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+    var rand1 = Math.floor(Math.random() * char.length);
+    var rand2 = Math.floor(Math.random() * char.length);
+    var rand3 = Math.floor(Math.random() * char.length);
+    var rand4 = Math.floor(Math.random() * char.length);
+    var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+
+this.fb.login(['email']).then(res => {
+
+  load.present();
+
+
+  const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+
+
+  firebase.auth().signInWithCredential(fc).then(done => {
+
+
+    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.goToRoot;
+
+    load.dismiss();
+
+    this.fb.api("/"+res.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
+
+
+      this.db.list("users",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(usercheck => {
+          
+        if(usercheck[0] == undefined){
+
+          this.db.list("users").push({
+            email:res.email,
+             name:res.name,
+            id:rand,
+            image:res.picture.data.url,
+          })
+        
+      }
+
+      })
+
+    })
+
+  }).catch(err => {
+    this.showalert("استخدم حساب مختلف");
+    load.dismiss();
+  })
+
+
+})
+
+  }
+
+
 
 }

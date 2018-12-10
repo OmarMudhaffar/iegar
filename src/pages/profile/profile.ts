@@ -25,9 +25,8 @@ export class ProfilePage {
 
   ngOnInit(){
     var winh = $(window).height();
-    var navh = $(".header").innerHeight();
-    console.log(navh);
-    $("page-profile .mcont").height(winh - (navh + navh + navh))
+    var navh = $("page-profile .header").innerHeight();
+    $("page-profile .mcont").height(winh - (navh + navh) )
 
   }
 

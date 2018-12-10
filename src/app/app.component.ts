@@ -8,11 +8,14 @@ import { RegisterPage } from '../pages/register/register';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { OneSignal } from '@ionic-native/onesignal';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { ProfilePage } from '../pages/profile/profile';
+
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage:any = RegisterPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     public auth : AngularFireAuth,public oneSignal: OneSignal,public db : AngularFireDatabase) {
@@ -23,6 +26,11 @@ export class MyApp {
         if(!user.emailVerified){
           this.rootPage = RegisterPage
       }
+
+      if(user.emailVerified){
+        this.rootPage = ProfilePage
+    }
+      
       }
 
       if(user == undefined){
