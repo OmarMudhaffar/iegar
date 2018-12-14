@@ -29,6 +29,11 @@ page-edit .toolbar-title-md {
 
 }
 
+page-edit .toolbar-title-md p{
+    margin: 0 5px !important;
+    display: inline-block;
+    }
+
 
 page-edit .list-md {
 direction: rtl;
@@ -105,7 +110,7 @@ page-edit .pics img {
     width: 100%;
     height: 100%;
 }
-
+ 
 
 
 page-edit .grid {
@@ -114,6 +119,10 @@ page-edit .grid {
 
 
 
-page-edit .back-button-icon-md {
-    color: #000;
+
+page-about .savedata {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #001f3f;
+    padding: 15px;
 }

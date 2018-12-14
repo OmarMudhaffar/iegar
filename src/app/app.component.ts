@@ -8,7 +8,7 @@ import { RegisterPage } from '../pages/register/register';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { OneSignal } from '@ionic-native/onesignal';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { ProfilePage } from '../pages/profile/profile';
+
 
 
 @Component({
@@ -28,7 +28,7 @@ export class MyApp {
       }
 
       if(user.emailVerified){
-        this.rootPage = ProfilePage
+        this.rootPage = TabsPage
     }
       
       }

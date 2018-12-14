@@ -59,7 +59,10 @@
             <ion-avatar item-start>
               <img [src]="item.payload.val().pic">
             </ion-avatar>
-            <h2>{{item.payload.val().name}}</h2>
+            <h2 class="username">
+                    {{item.payload.val().name}}
+                   <img *ngIf="item.payload.val().verified" src="assets/imgs/verfi.png" width="13" height="13" />
+            </h2>
             <p>{{item.payload.val().date}}</p>
           </ion-item>
         
@@ -115,7 +118,7 @@
                   <div class="msection">
                   
                   <div>
-                    <button ion-button icon-start clear item-end  (click)="view(item.key,item.payload.val().pic,item.payload.val().name,item.payload.val().date,item.payload.val().type,item.payload.val().title,item.payload.val().prev,item.payload.val().mntka,item.payload.val().price,item.payload.val().roms,item.payload.val().storey,item.payload.val().space,item.payload.val().image,item.payload.val().images,item.payload.val().addr,item.payload.val().phone)" >
+                    <button ion-button icon-start clear item-end  (click)="view(item.key,item.payload.val().pic,item.payload.val().name,item.payload.val().date,item.payload.val().type,item.payload.val().title,item.payload.val().prev,item.payload.val().mntka,item.payload.val().price,item.payload.val().roms,item.payload.val().storey,item.payload.val().space,item.payload.val().image,item.payload.val().images,item.payload.val().addr,item.payload.val().phone,item.payload.val().lat,item.payload.val().lng,item.payload.val().email,item.payload.val().id)" >
                       معاينة
                           <ion-icon name="md-navigate"></ion-icon>
                         </button>

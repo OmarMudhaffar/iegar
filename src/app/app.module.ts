@@ -30,6 +30,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
 
+
+// you dont have to hack it :)
 var config = {
   apiKey: "AIzaSyDml8NAQEvBRQeO_YSY_miPCRmPcuFev9k",
   authDomain: "fakenews-id.firebaseapp.com",

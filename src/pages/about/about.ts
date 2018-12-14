@@ -26,7 +26,8 @@ export class AboutPage {
   userinfo = {
     name : "",
     email : "",
-    profile : ""
+    profile : "",
+    ver : false
   }
 
   constructor(public navCtrl: NavController,private camera:Camera, public load : LoadingController,
@@ -39,6 +40,7 @@ export class AboutPage {
        db.list("users",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
          this.userinfo.name = data[0]['name'];
          this.userinfo.profile = data[0]['image'];
+         this.userinfo.ver = data[0]['verified'];
        })
      }
    })
@@ -216,6 +218,7 @@ export class AboutPage {
     lng:gp.coords.longitude,
     lat:gp.coords.latitude,
     phone:phone,
+    ver:this.userinfo.ver,
     images:this.donloadImgs,
     image:this.donloadImgs[0],
     date: monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()

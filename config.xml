@@ -104,5 +104,5 @@
         <variable name="APP_NAME" value="IEGAR" />
         <variable name="FACEBOOK_ANDROID_SDK_VERSION" value="4.38.1" />
     </plugin>
-    <engine name="android" spec="^7.1.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>

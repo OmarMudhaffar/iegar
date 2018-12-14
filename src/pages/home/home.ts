@@ -27,7 +27,8 @@ export class HomePage {
  mySelectedPhoto;
  loading;
  currentPhoto ;
- imgSource;;
+ imgSource;
+ userid;
 
   constructor(public navCtrl: NavController,public auth : AngularFireAuth,
     public alert : AlertController,public db : AngularFireDatabase,
@@ -43,9 +44,10 @@ export class HomePage {
     
   })
 
+
+
   var host = "www.google.com";
 
-  this.dns.resolve(host).then(addr => {
 
     malert.dismiss();
 
@@ -56,14 +58,19 @@ export class HomePage {
       }
     })
   
-    
-  
-    $(document).on('offline online', function (event) {
-      console.log('You are ' + event.type + '!');
-  });
-  
   auth.authState.subscribe(user => {
           if(user != undefined){
+
+
+            db.list("users",ref=>ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data =>
+              {
+           
+                if(data[0] != undefined){
+                  this.userid = data[0]['id'];
+                }
+          
+              })
+
             this.email = user.email
             db.list("users",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data => {
               this.image = data[0]['image']
@@ -82,14 +89,14 @@ export class HomePage {
            this.list = data;
            this.homelist = data;
          });
+
+     
   
 
-  },err => {
 
-    malert.present();
 
-  })
-
+  
+        
   
 
   }
@@ -333,15 +340,15 @@ export class HomePage {
     }
 
 
-    saveFav(id,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone){
+    saveFav(id,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone,ver){
 
-    var sub =  this.db.list("favorite",ref => ref.orderByChild("id").equalTo(id)).valueChanges().subscribe(data => {
+    var sub =  this.db.list(`favorite/${this.userid}`,ref => ref.orderByChild("id").equalTo(id)).valueChanges().subscribe(data => {
       sub.unsubscribe();
 
         if(data[0] == undefined){
           sub.unsubscribe();
 
-          this.db.list("favorite").push({
+          this.db.list(`favorite/${this.userid}`).push({
             name:name,
             email:this.email,
             pic:pic,
@@ -359,6 +366,8 @@ export class HomePage {
             image:image,
             date: date,
             id:id,
+            verified:ver
+
             }).then( ()=> {
            var toast = this.toast.create({
              message:"تم حفظ الاعلان",
@@ -432,8 +441,7 @@ export class HomePage {
     }
 
 
-    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone,lat,lng){
-
+    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone,lat,lng,email,id,ver){
       this.navCtrl.push(ViewPage,{
         name:name,
         key:key,
@@ -452,7 +460,10 @@ export class HomePage {
         image:image,
         date: date,
         lat:lat,
-        lng:lng
+        lng:lng,
+        email:email,
+        id:id,
+        verified:ver
       })
 
     }

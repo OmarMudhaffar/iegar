@@ -26,9 +26,14 @@ export class ContactPage {
       auth.authState.subscribe(user => {
         if(user != undefined){
 
-          
-      
-      db.list("favorite",ref => ref.orderByChild("email").equalTo(user.email)).snapshotChanges().subscribe(data => {
+          this.email = user.email
+
+          db.list("users",ref=>ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data =>
+            {
+         
+              if(data[0] != undefined){
+
+      db.list(`favorite/${data[0]['id']}`).snapshotChanges().subscribe(data => {
         $("page-contact .spinner").hide();
         if(data[0] == undefined){
           $("page-contact .notfound").show();
@@ -40,7 +45,11 @@ export class ContactPage {
         this.homelist = data;
       });
 
-          this.email = user.email
+              }
+        
+            })
+      
+
         }
       })
 
@@ -302,8 +311,7 @@ export class ContactPage {
 
 
      
-    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone){
-
+    view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone,lat,lng,email,id){
       this.navCtrl.push(ViewPage,{
         name:name,
         key:key,
@@ -320,7 +328,11 @@ export class ContactPage {
         phone:phone,
         images:images,
         image:image,
-        date: date
+        date: date,
+        lat:lat,
+        lng:lng,
+        email:email,
+        id:id
       })
 
     }

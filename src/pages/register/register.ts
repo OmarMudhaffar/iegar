@@ -130,6 +130,14 @@ export class RegisterPage {
   
     register(email,name:any,pass){
   
+      
+    var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
+    var rand1 = Math.floor(Math.random() * char.length);
+    var rand2 = Math.floor(Math.random() * char.length);
+    var rand3 = Math.floor(Math.random() * char.length);
+    var rand4 = Math.floor(Math.random() * char.length);
+    var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
+
   
       if(email.length > 0 && pass.length > 0 && name.length > 0) {
   
@@ -159,7 +167,8 @@ export class RegisterPage {
               email:email,
               name:name,
               image:"https://firebasestorage.googleapis.com/v0/b/vote-b1894.appspot.com/o/11906329_960233084022564_1448528159_a.jpg?alt=media&token=dd943fc8-1538-4ad5-88dd-a4db29fa069d",
-              verified:false
+              verified:false,
+              id:rand
             })
     
           load.dismiss();
@@ -280,6 +289,7 @@ export class RegisterPage {
               email:res.email,
               name:res.displayName,
               id:rand,
+              verified:false,
               image:res.imageUrl,
             })
           
@@ -299,7 +309,7 @@ export class RegisterPage {
 
     var load = this.load.create({
       content:"جاري المعالجة",
-      cssClass:"dirion"
+      cssClass:"loaddire"
     });
 
     var char = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v"];
@@ -336,6 +346,8 @@ this.fb.login(['email']).then(res => {
             email:res.email,
              name:res.name,
             id:rand,
+            verified:false,
+
             image:res.picture.data.url,
           })
         

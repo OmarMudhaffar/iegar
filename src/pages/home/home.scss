@@ -18,6 +18,16 @@ page-home .toolbar-title-md {
 
 }
 
+.username {
+    display: flex;
+    align-items: center;
+}
+
+ .username img {
+    width: auto !important;
+    padding-right: 2px;
+}
+
 page-home .toolbar-title-md p{
     margin: 0 5px;
     display: inline-block;

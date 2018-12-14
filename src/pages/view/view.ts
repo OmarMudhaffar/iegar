@@ -7,6 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { Slides } from 'ionic-angular';
 import { ViewgpsPage } from '../viewgps/viewgps';
+import { AngularFireAuth } from '@angular/fire/auth';
 /**
  * Generated class for the ViewPage page.
  *
@@ -44,14 +45,16 @@ export class ViewPage {
   type
   lat
   lng
+  id
+  userid
+  verified
 
   constructor(public navCtrl: NavController, public params: NavParams,public alert : AlertController,
     public toast : ToastController,public db : AngularFireDatabase,private callNumber: CallNumber,
-    public gps : Geolocation) {
+    public gps : Geolocation,public auth : AngularFireAuth) {
 
     this.name = params.get("name");
     this.key= params.get("key");
-    this.email= params.get("email");
     this.pic= params.get("pic");
     this.title= params.get("title");
     this.prev= params.get("prev");
@@ -68,8 +71,19 @@ export class ViewPage {
     this.date= params.get("date");
     this.lat= params.get("lat");
     this.lng= params.get("lng");
+    this.images = params.get("images");
+    this.id= params.get("id");
+    this.verified = params.get("verified");
+    this.email = auth.auth.currentUser.email;
 
+    db.list("users",ref=>ref.orderByChild("email").equalTo(this.email)).valueChanges().subscribe(data =>
+    {
+ 
+      if(data[0] != undefined){
+        this.userid = data[0]['id'];
+      }
 
+    })
 
   }
 
@@ -79,32 +93,34 @@ export class ViewPage {
 
 
 
-  saveFav(id,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone){
-
-    var sub =  this.db.list("favorite",ref => ref.orderByChild("id").equalTo(id)).valueChanges().subscribe(data => {
+  saveFav(){
+    var sub =  this.db.list(`favorite/${this.userid}`,ref => ref.orderByChild("id").equalTo(this.id)).valueChanges().subscribe(data => {
       sub.unsubscribe();
 
         if(data[0] == undefined){
           sub.unsubscribe();
 
-          this.db.list("favorite").push({
-            name:name,
+          this.db.list(`favorite/${this.userid}`).push({
+            name:this.name,
             email:this.email,
-            pic:pic,
-            title:title,
-            prev:prev,
-            mntka:mntka,
-            type:type,
-            space:space,
-            storey:storey,
-            roms:reoms,
-            price:price,
-            addr:addr,
-            phone:phone,
-            images:images,
-            image:image,
-            date: date,
-            id:id,
+            pic:this.pic,
+            title:this.title,
+            prev:this.prev,
+            mntka:this.mntka,
+            type:this.type,
+            space:this.space,
+            storey:this.storey,
+            roms:this.roms,
+            price:this.price,
+            addr:this.addr,
+            phone:this.phone,
+            images:this.donloadImgs,
+            image:this.image,
+            date: this.date,
+            id:this.id,
+            lat:this.lat,
+            lng:this.lng,
+            verified:this.verified
             }).then( ()=> {
            var toast = this.toast.create({
              message:"تم حفظ الاعلان",
