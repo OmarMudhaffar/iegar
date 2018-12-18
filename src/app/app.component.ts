@@ -20,7 +20,10 @@ export class MyApp {
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     public auth : AngularFireAuth,public oneSignal: OneSignal,public db : AngularFireDatabase) {
 
+
+     
     auth.authState.subscribe(user => {
+
       
       if(user != undefined){
         if(!user.emailVerified){
@@ -28,6 +31,7 @@ export class MyApp {
       }
 
       if(user.emailVerified){
+        
         this.rootPage = TabsPage
     }
       

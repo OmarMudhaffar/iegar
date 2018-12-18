@@ -1,0 +1,136 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        
+        <div class="mtitle">
+            <p>ايجار</p>
+          </div>
+    
+  
+      
+      </ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+    
+    
+  
+  <ion-content>
+  
+  
+      <ion-card *ngFor="let item of list | async">
+  
+          <ion-item>
+  
+  
+  
+              <ion-avatar item-start>
+                <img [src]="item.payload.val().pic">
+              </ion-avatar>
+              <h2 class="username">
+                {{item.payload.val().name}}
+               <img *ngIf="item.payload.val().verified" src="assets/imgs/verfi.png" width="13" height="13" />
+              </h2>
+              <p>{{item.payload.val().date}}</p>
+            </ion-item>
+          
+  
+            <ion-slides  pager="true" dir="ltr" autoplay="4000" loop="true" speed="2000" paginationType="fraction">
+              <ion-slide *ngFor="let item of item.payload.val().images">
+               <div class="imagedev"  [ngStyle]="{'background-image': 'url(' + item + ')'}"></div>
+              </ion-slide>
+  
+  
+            </ion-slides>
+  
+          <ion-card-content>
+            <ion-card-title>
+              {{item.payload.val().title}}
+              </ion-card-title>
+            
+  
+              <ion-item>
+                  <img src="assets/imgs/placeholder.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+  
+                  <h2>{{item.payload.val().prev}}</h2>
+                  <p>{{item.payload.val().mntka}}</p>
+                </ion-item>
+  
+                <ion-item>
+                    <img src="assets/imgs/money-bag.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>{{item.payload.val().price}}</h2>
+                    <p>يمكنك الاتصال لتأكيد السعر</p>
+                  </ion-item>
+  
+                  <ion-item>
+                    <img src="assets/imgs/homee.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>نوع العقد</h2>
+                    <p>{{item.payload.val().type}} </p>
+  
+                  </ion-item>
+  
+  
+                  <ion-item>
+                    <img src="assets/imgs/map.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>مكان البائع</h2>
+                    <p>{{item.payload.val().addr}} </p>
+                  </ion-item>
+  
+                  <ion-item>
+                    <img src="assets/imgs/smartphone.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
+                    <h2>رقم الهاتف</h2>
+                    <p>{{item.payload.val().phone}} </p>
+  
+                  </ion-item>
+  
+  
+          </ion-card-content>
+  
+  
+                  <div class="futures">
+                      <div class="roms">
+                        <button ion-button color="danger">{{item.payload.val().roms}}</button>
+                        <p>غرف</p>
+                      </div>
+                      <div class="tabk">
+                        <button ion-button color="info">{{item.payload.val().storey}}</button>
+                        <p>طوابق</p>
+                      </div>
+                      <div class="space">
+                        <button ion-button color="dark">{{item.payload.val().space}}</button>
+                        <p>المساحة</p>
+                      </div>
+                  </div>
+             
+  
+      <ion-item>
+  <div class="msection">
+  
+  <div >
+      <button ion-button icon-start clear item-end  (click)="add(item.key,item.payload.val().userid,item.payload.val().title,item.payload.val().price)" >
+          قبول
+          <ion-icon name="md-navigate"></ion-icon>
+        </button>
+  
+  </div>
+  <div class="warm">
+    <button ion-button icon-start clear item-start (click)="delete(item.key,item.payload.val().userid)">
+        حذف
+        <ion-icon name="md-trash"></ion-icon>
+      </button>
+  </div>
+  
+  
+  
+  
+  </div>
+  
+    </ion-item>
+  
+  
+        </ion-card>
+  
+  </ion-content>
+  

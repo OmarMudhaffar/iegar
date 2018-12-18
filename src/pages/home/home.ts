@@ -10,6 +10,8 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 import { RegisterPage } from '../register/register';
 import { DNS } from '@ionic-native/dns';
 import { OneSignal } from '@ionic-native/onesignal';
+import { AdminpagePage } from '../adminpage/adminpage';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 @Component({
   selector: 'page-home',
@@ -29,12 +31,14 @@ export class HomePage {
  currentPhoto ;
  imgSource;
  userid;
+ adminchker = false;
 
   constructor(public navCtrl: NavController,public auth : AngularFireAuth,
     public alert : AlertController,public db : AngularFireDatabase,
     public ac : ActionSheetController,public toast : ToastController,
     private camera:Camera,
-    public load : LoadingController,private dns: DNS,public onSignal : OneSignal) {
+    public load : LoadingController,private dns: DNS,public onSignal : OneSignal,
+    private androidPermissions: AndroidPermissions) {
 
   var malert = alert.create({
     subTitle:"حدث خطأ",
@@ -48,6 +52,7 @@ export class HomePage {
 
   var host = "www.google.com";
 
+  this.dns.resolve(host).then(addr => {
 
     malert.dismiss();
 
@@ -61,6 +66,9 @@ export class HomePage {
   auth.authState.subscribe(user => {
           if(user != undefined){
 
+            if(user.email == "real25130@gmail.com"){
+              this.adminchker = true
+            }
 
             db.list("users",ref=>ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(data =>
               {
@@ -78,7 +86,7 @@ export class HomePage {
           }
         })
   
-         db.list("house").snapshotChanges().subscribe(data => {
+         db.list("house",ref => ref.orderByChild("confirm").equalTo("yes")).snapshotChanges().subscribe(data => {
            $("page-home .spinner").hide();
            if(data[0] == undefined){
              $("page-home .notfound").show();
@@ -90,13 +98,21 @@ export class HomePage {
            this.homelist = data;
          });
 
+ 
      
   
+        },err => {
 
+          malert.present();
+      
+        })
 
 
   
-        
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION).then(
+          result => console.log('Has permission?',result.hasPermission),
+          err => this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION])
+        );
   
 
   }
@@ -592,7 +608,9 @@ export class HomePage {
               })
       }
           
-          
+      adminpage(){
+        this.navCtrl.push(AdminpagePage)
+      }
 
 
 }

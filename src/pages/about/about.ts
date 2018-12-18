@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController, ActionSheetController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, ActionSheetController, AlertController, Platform } from 'ionic-angular';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import * as firebase from 'firebase/app';
 import { AngularFireDatabase } from '@angular/fire/database';
@@ -8,6 +8,9 @@ import { HomePage } from '../home/home';
 import { Geolocation } from '@ionic-native/geolocation';
 import { ProfilePage } from '../profile/profile';
 import { OneSignal } from '@ionic-native/onesignal';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+
 
 @Component({
   selector: 'page-about',
@@ -27,12 +30,17 @@ export class AboutPage {
     name : "",
     email : "",
     profile : "",
-    ver : false
+    ver : false,
+    userid : ""
   }
+  lat = 0;
+  lng = 0;
 
   constructor(public navCtrl: NavController,private camera:Camera, public load : LoadingController,
     public db : AngularFireDatabase,public auth : AngularFireAuth,public toast : ToastController,
-    public ac : ActionSheetController, public gps : Geolocation,public oneSignal: OneSignal) {
+    public ac : ActionSheetController, public gps : Geolocation,public oneSignal: OneSignal,
+    public alert : AlertController,
+    platform : Platform,private diagnostic: Diagnostic,private locationAccuracy: LocationAccuracy) {
 
    auth.authState.subscribe(user => {
      if(user != undefined){
@@ -42,8 +50,48 @@ export class AboutPage {
          this.userinfo.profile = data[0]['image'];
          this.userinfo.ver = data[0]['verified'];
        })
+       db.list("ids",ref => ref.orderByChild("email").equalTo(user.email)).valueChanges().subscribe(daya => {
+         this.userinfo.userid = daya[0]['id'];
+       })
      }
    })
+
+   platform.ready().then( ()=> {
+
+    let options = {
+      timeout: 30000,
+      enableHighAccuracy: true
+      }
+  
+     gps.getCurrentPosition(options).then(dir => {
+       this.lat = dir.coords.latitude,
+       this.lng = dir.coords.longitude
+       
+     }).catch(err => {
+      var m = alert.create({
+         subTitle:err.message
+       });
+       m.present();
+     })
+
+   })
+   
+   this.diagnostic.isLocationEnabled().then(res => {
+     if(!res){
+      this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+        if(canRequest) {
+          // the accuracy option will be ignored by iOS
+          this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+            () => console.log('Request successful'),
+            error => console.log('Error requesting location permissions', error)
+          );
+        }
+      
+      });
+     }
+   })
+
   }
 
 
@@ -196,72 +244,100 @@ export class AboutPage {
 
   if(this.donloadImgs[0] != undefined){
     
+
+
     if (space > 0 &&  storey > 0 && roms > 0 && phone > 0 && prev != "المحافظة" && type != "نوع العقد"  && title.replace(/\s/g,"") != "" && mntka.replace(/\s/g,"") != "" && addr.replace(/\s/g,"") != ""  && price.replace(/\s/g,"") != ""){
 
-
-   this.gps.getCurrentPosition().then(gp => {
+      this.diagnostic.isLocationEnabled().then(res => {
      
-   this.db.list("house").push({
-    name:this.userinfo.name,
-    email:this.userinfo.email,
-    pic:this.userinfo.profile,
-    title:title,
-    prev:prev,
-    mntka:mntka,
-    type:type,
-    space:space,
-    storey:storey,
-    roms:roms,
-    price:price,
-    addr:addr,
-    id:rand,
-    lng:gp.coords.longitude,
-    lat:gp.coords.latitude,
-    phone:phone,
-    ver:this.userinfo.ver,
-    images:this.donloadImgs,
-    image:this.donloadImgs[0],
-    date: monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
-    }).then( ()=> {
-   var toast = this.toast.create({
-     message:"تم نشر الاعلان",
-     cssClass:"setdire",
-     duration:3000
-   })
-   toast.present();
-   this.navCtrl.setRoot(HomePage);
-   this.navCtrl.goToRoot;
+    if(res){
 
+   var alert = this.alert.create({
+    subTitle:"سيتم ارسال اعلانك للمعاينة",
+    cssClass:"setdire",
+    message:"سيتم ابلاغك عندما بوافق المسؤال على اعلانك",
+    buttons:[{text:"ارسال الاعلان",handler: ()=>{
+    
+      this.db.list("house").push({
+        name:this.userinfo.name,
+        pic:this.userinfo.profile,
+        email:this.userinfo.email,
+        userid:this.userinfo.userid,
+        title:title,
+        prev:prev,
+        mntka:mntka,
+        type:type,
+        space:space,
+        confirm:"no",
+        storey:storey,
+        roms:roms,
+        price:price,
+        addr:addr,
+        id:rand,
+        lat:this.lat,
+        lng:this.lng,
+        phone:phone,
+        verified:this.userinfo.ver,
+        images:this.donloadImgs,
+        image:this.donloadImgs[0],
+        date: monthNames[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear()
+        }).then( ()=> {
+       var toast = this.toast.create({
+         message:"تم ارسال الاعلان",
+         cssClass:"setdire",
+         duration:3000
+       })
+       toast.present();
+       this.navCtrl.setRoot(HomePage);
+       this.navCtrl.goToRoot;
+       
 
-
-   this.db.list("ids").valueChanges().subscribe( ids => {
-
-    ids.forEach(id => {
-
-
-      if(id['email'] != this.auth.auth.currentUser.email){
-        this.oneSignal.postNotification({
-          app_id:"6bb2ae4a-0c5f-4c3c-85b4-1648d4d8929c",
-          include_player_ids:[id['id']],
-          contents: {
-            en: "بسعر : " + price
-          },
-          headings: {
-            en: title
-          }
+       this.db.list("ids",ref => ref.orderByChild("email").equalTo("real25130@gmail.com")).valueChanges().subscribe( ids => {
+    
+        ids.forEach(id => {
+    
+    
+            this.oneSignal.postNotification({
+              app_id:"6bb2ae4a-0c5f-4c3c-85b4-1648d4d8929c",
+              include_player_ids:[id['id']],
+              contents: {
+                en: "هناك اعلان ينتضر منك الموافقة عليه"
+              },
+              headings: {
+                en: "اعلان بلانتضار"
+              }
+            })
+    
+         
         })
-      }
+    
+      })
 
-     
-    })
+        })
 
+    }},"الغاء"]
   })
 
+  alert.present();
 
+    }
 
-    })
- 
-   })
+    if(!res){
+      this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+
+        if(canRequest) {
+          // the accuracy option will be ignored by iOS
+          this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+            () => console.log('Request successful'),
+            error => console.log('Error requesting location permissions', error)
+          );
+        }
+      
+      });
+    }
+
+   
+  })
 
 
  }else{

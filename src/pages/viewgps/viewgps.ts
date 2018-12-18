@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams,Platform} from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
-
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 import {
 
@@ -30,7 +31,24 @@ export class ViewgpsPage {
   gpsmap : GoogleMap;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public platform : Platform,
-    public db : AngularFireDatabase,public gps : Geolocation) {
+    public db : AngularFireDatabase,public gps : Geolocation,
+    private diagnostic: Diagnostic,private locationAccuracy: LocationAccuracy) {
+
+      this.diagnostic.isLocationEnabled().then(res => {
+        if(!res){
+         this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+   
+           if(canRequest) {
+             // the accuracy option will be ignored by iOS
+             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+               () => console.log('Request successful'),
+               error => console.log('Error requesting location permissions', error)
+             );
+           }
+         
+         });
+        }
+      })
 
       this.lat = navParams.get("lat");
       this.lng = navParams.get("lng");

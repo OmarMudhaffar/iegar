@@ -17,7 +17,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { RegisterPage } from '../pages/register/register';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { RevrsePipe } from '../pipes/revrse/revrse';
 import { ProfilePage } from '../pages/profile/profile';
 import { EditPage } from '../pages/edit/edit';
 import { ViewPage } from '../pages/view/view';
@@ -29,6 +28,12 @@ import { OneSignal } from '@ionic-native/onesignal';
 import { GooglePlus } from '@ionic-native/google-plus';
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
+import { PipesModule } from '../pipes/pipes.module';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { AdminpagePage } from '../pages/adminpage/adminpage';
+import { Diagnostic } from '@ionic-native/diagnostic';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 
 // you dont have to hack it :)
@@ -50,13 +55,7 @@ firebase.initializeApp(config);
     ContactPage,
     HomePage,
     TabsPage,
-    RegisterPage,
-    RevrsePipe,
-    ProfilePage,
-    EditPage,
-    ViewPage,
-    MapPage,
-    ViewgpsPage
+ 
   ],
   imports: [
     BrowserModule,
@@ -64,7 +63,9 @@ firebase.initializeApp(config);
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(config),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    PipesModule
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -78,7 +79,8 @@ firebase.initializeApp(config);
     EditPage,
     ViewPage,
     MapPage,
-    ViewgpsPage
+    ViewgpsPage,
+    AdminpagePage
   ],
   providers: [
     StatusBar,
@@ -90,6 +92,10 @@ firebase.initializeApp(config);
     Geolocation,
     CallNumber,
     Facebook,
+    AndroidPermissions,
+    Diagnostic,
+    LocationAccuracy,
+    NativeStorage,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })

@@ -319,51 +319,49 @@ export class RegisterPage {
     var rand4 = Math.floor(Math.random() * char.length);
     var rand = char[rand1] + char[rand2] + char[rand3] + char[rand4];
 
-this.fb.login(['email']).then(res => {
 
-  load.present();
+   this.fb.login(['email']).then( (res)=> {
+    var crend = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+    firebase.auth().signInWithCredential(crend).then(info => {
 
+    var load = this.load.create({
+      content:"جاري المعالجة",
+      cssClass:"loaddire"
+    });
 
-  const fc = firebase.auth.FacebookAuthProvider.credential(res.authResponse.accessToken);
+    load.present();
 
+    this.db.list("users",ref => ref.orderByChild("email").equalTo(info.email)).valueChanges().subscribe(data => {
+      
+      if(data[0] == undefined){
+        this.db.list("users").push({
+          email:info.email,
+          name:info.displayName,
+          id:rand,
+          verified:false,
+          image:info.photoURL,
+        }).then( ()=> {
+          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.goToRoot;
+        })
+        load.dismiss();
 
-  firebase.auth().signInWithCredential(fc).then(done => {
-
-
-    this.navCtrl.setRoot(TabsPage);
-    this.navCtrl.goToRoot;
-
-    load.dismiss();
-
-    this.fb.api("/"+res.authResponse.userID+"/?fields=id,email,name,picture",["public_profile"]).then(res => {
-
-
-      this.db.list("users",ref=>ref.orderByChild("email").equalTo(res.email)).valueChanges().subscribe(usercheck => {
-          
-        if(usercheck[0] == undefined){
-
-          this.db.list("users").push({
-            email:res.email,
-             name:res.name,
-            id:rand,
-            verified:false,
-
-            image:res.picture.data.url,
-          })
-        
       }
 
-      })
+      if(data[0] != undefined){
+        load.dismiss();
+        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.goToRoot;
+      }
+
+     
+      
 
     })
 
-  }).catch(err => {
-    this.showalert("استخدم حساب مختلف");
-    load.dismiss();
-  })
+    })
 
-
-})
+   })
 
   }
 

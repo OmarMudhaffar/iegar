@@ -66,7 +66,11 @@ export class ViewPage {
     this.price= params.get("price");
     this.addr= params.get("addr");
     this.phone= params.get("phone");
-    this.donloadImgs= params.get("images");
+
+    this.donloadImgs = params.get("images");
+
+    
+
     this.image= params.get("image");
     this.date= params.get("date");
     this.lat= params.get("lat");

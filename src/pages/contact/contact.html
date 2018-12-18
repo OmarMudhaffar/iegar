@@ -53,31 +53,31 @@
 
   </div>
 
-    <ion-card *ngFor="let item of list | revrse">
+    <ion-card *ngFor="let item of list">
 
         <ion-item>
             <ion-avatar item-start>
-              <img [src]="item.payload.val().pic">
+              <img [src]="item.pic">
             </ion-avatar>
             <h2 class="username">
-                    {{item.payload.val().name}}
-                   <img *ngIf="item.payload.val().verified" src="assets/imgs/verfi.png" width="13" height="13" />
+                    {{item.name}}
+                   <img *ngIf="item.verified" src="assets/imgs/verfi.png" width="13" height="13" />
             </h2>
-            <p>{{item.payload.val().date}}</p>
+            <p>{{item.date}}</p>
           </ion-item>
         
 
-        <div class="imagedev" [ngStyle]="{'background-image': 'url(' + item.payload.val().image + ')'}">
+        <div class="imagedev" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
         
           <div class="overlay">
-            {{item.payload.val().type}}
+            {{item.type}}
           </div>
 
         </div>
 
         <ion-card-content>
           <ion-card-title>
-            {{item.payload.val().title}}
+            {{item.title}}
             <ion-icon name="trash" float-start color="danger" (click)="delete(item.key)"></ion-icon>
 
             </ion-card-title>
@@ -86,13 +86,13 @@
             <ion-item>
                 <img src="assets/imgs/placeholder.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
 
-                <h2>{{item.payload.val().prev}}</h2>
-                <p>{{item.payload.val().mntka}}</p>
+                <h2>{{item.prev}}</h2>
+                <p>{{item.mntka}}</p>
               </ion-item>
 
               <ion-item>
                   <img src="assets/imgs/money-bag.svg" item-start width="28" height="32" style="display:inline-block;width: auto;"/>
-                  <h2>{{item.payload.val().price}}</h2>
+                  <h2>{{item.price}}</h2>
                   <p>يمكنك الاتصال لتأكيد السعر</p>
                 </ion-item>
 
@@ -101,15 +101,15 @@
 
                 <div class="futures">
                     <div class="roms">
-                      <button ion-button color="danger">{{item.payload.val().roms}}</button>
+                      <button ion-button color="danger">{{item.roms}}</button>
                       <p>غرف</p>
                     </div>
                     <div class="tabk">
-                      <button ion-button color="info">{{item.payload.val().storey}}</button>
+                      <button ion-button color="info">{{item.storey}}</button>
                       <p>طوابق</p>
                     </div>
                     <div class="space">
-                      <button ion-button color="dark">{{item.payload.val().space}}</button>
+                      <button ion-button color="dark">{{item.space}}</button>
                       <p>المساحة</p>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                   <div class="msection">
                   
                   <div>
-                    <button ion-button icon-start clear item-end  (click)="view(item.key,item.payload.val().pic,item.payload.val().name,item.payload.val().date,item.payload.val().type,item.payload.val().title,item.payload.val().prev,item.payload.val().mntka,item.payload.val().price,item.payload.val().roms,item.payload.val().storey,item.payload.val().space,item.payload.val().image,item.payload.val().images,item.payload.val().addr,item.payload.val().phone,item.payload.val().lat,item.payload.val().lng,item.payload.val().email,item.payload.val().id)" >
+                    <button ion-button icon-start clear item-end  (click)="view(item.$key,item.pic,item.name,item.date,item.type,item.title,item.prev,item.mntka,item.price,item.roms,item.storey,item.space,item.image,item.images,item.addr,item.phone,item.lat,item.lng,item.email,item.id)" >
                       معاينة
                           <ion-icon name="md-navigate"></ion-icon>
                         </button>

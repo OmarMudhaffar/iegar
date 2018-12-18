@@ -4,18 +4,20 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as $ from 'jquery'
 import { ViewPage } from '../view/view';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
 })
 export class ContactPage {
 
-  list = [];
+  list = [] ;
   homelist = [];
   selectValue = "جميع المحافضات"
   typeSelect = "ملك وايجار"
   storeyg = "جميع الطوابق"
-  email
+  email;
+  ids = [];
 
   constructor(public navCtrl: NavController,public auth : AngularFireAuth,
     public alert : AlertController,public db : AngularFireDatabase,
@@ -41,8 +43,24 @@ export class ContactPage {
         if(data[0] != undefined){
          $("page-contact .waiteload").hide();
        }
-        this.list = data;
-        this.homelist = data;
+
+       data.forEach(ids => {
+       this.ids.push(ids.payload.val()['id']);
+       })
+
+       this.ids.forEach(id => {
+         this.db.list("house",ref => ref.orderByChild("id").equalTo(id)).snapshotChanges().subscribe(info => {
+           info.forEach(infos => {
+             var y = infos.payload.toJSON()
+             y['$key'] = infos.key
+             this.list.push(y as listItemClass)
+           })
+         })
+       })
+
+       console.log(this.list)
+
+
       });
 
               }
@@ -312,6 +330,13 @@ export class ContactPage {
 
      
     view(key,pic,name,date,type,title,prev,mntka,price,reoms,storey,space,image,images,addr,phone,lat,lng,email,id){
+
+      var mimgs = []
+
+       $.map(images, function(value, key) {
+        mimgs.push(value)
+      });
+
       this.navCtrl.push(ViewPage,{
         name:name,
         key:key,
@@ -326,15 +351,39 @@ export class ContactPage {
         price:price,
         addr:addr,
         phone:phone,
-        images:images,
         image:image,
         date: date,
         lat:lat,
         lng:lng,
+        images:mimgs,
         email:email,
         id:id
       })
 
     }
 
+}
+
+
+export class listItemClass {
+  name
+  key
+  pic
+  title
+  prev
+  mntka
+  type
+  space
+  storey
+  roms
+  price
+  addr
+  phone
+  images = []
+  image
+  date
+  lat
+  lng
+  email
+  id
 }
