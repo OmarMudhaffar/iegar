@@ -38,12 +38,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions';
 
 // you dont have to hack it :)
 var config = {
-  apiKey: "AIzaSyDml8NAQEvBRQeO_YSY_miPCRmPcuFev9k",
-  authDomain: "fakenews-id.firebaseapp.com",
-  databaseURL: "https://fakenews-id.firebaseio.com",
-  projectId: "fakenews-id",
-  storageBucket: "fakenews-id.appspot.com",
-  messagingSenderId: "1098066924806"
+
 };
 
 firebase.initializeApp(config);
